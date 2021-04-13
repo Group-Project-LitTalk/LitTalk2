@@ -51,6 +51,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView tvDescription;
+        private TextView tvTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,7 +68,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
             if(image != null)
             {
-                Glide.with(context).load(post.getImage().getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, Target.SIZE_ORIGINAL).fitCenter().into(ivImage);
+                Glide.with(context).load(post.getImage().getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, 100).centerCrop().into(ivImage);
             }
 
         }

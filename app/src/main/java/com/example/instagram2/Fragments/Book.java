@@ -19,10 +19,10 @@ public class Book {
         overview = jsonObject.getString("overview");
     }
 
-    public static List<Book> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
+    public static List<Book> fromJsonArray(JSONArray bookJsonArray) throws JSONException {
         List<Book> books = new ArrayList<>();
-        for (int i = 0; i<bookJsonArray.length(); i++){
-            books.add(new Book(bookJsonArray.getJSONObject(i)));
+        for (int i = 0; i< bookJsonArray.length(); i++){
+            books.add(new Book( bookJsonArray.getJSONObject(i)));
         }
         return books;
     }

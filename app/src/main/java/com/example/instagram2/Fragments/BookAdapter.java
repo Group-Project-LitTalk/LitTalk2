@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagram2.R;
 
 import java.util.List;
 
@@ -48,20 +49,19 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvDescription;
+        TextView tvTitle;
         TextView tvUsername;
         ImageView ivImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvUsername = itemView.findViewById(R.id.tvUsername);
-            tvDescription= itemView.findViewById(R.id.tvDescription);
+            tvTitle = itemView.findViewById(R.id.tvDescription);
             ivImage = itemView.findViewById(R.id.ivImage);
         }
 
         public void bind(Book book) {
-            tvUsername.setText(book.getUsername());
-            tvDescription.setText(book.getDescription());
+            tvUsername.setText(book.getTitle());
+            tvTitle.setText(book.getTitle());
             Glide.with(context).load(book.getPosterPath()).into(ivImage);
         }
     }
