@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.parse.ParseFile;
 
+
+
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
@@ -62,10 +64,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvTitle = itemView.findViewById(R.id.tvBookTitle);
+
             tvTitle.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG,"It clicked");
+
+                    Intent i = new Intent(context, RegisterActivity.class);
+
+                    context.startActivity(i);
                 }
             });
         }
@@ -82,5 +89,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             }
 
         }
+
+
+
+
+
+
+
     }
 }
