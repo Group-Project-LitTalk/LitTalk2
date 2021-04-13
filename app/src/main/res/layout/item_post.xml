@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:layout_margin="4dp"
+    android:background="#EFEFEF"
+    tools:layout_editor_absoluteX="3dp"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/tvUsername"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed-medium"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -18,48 +20,55 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Lilian" />
 
     <ImageView
         android:id="@+id/ivImage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:cropToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/send"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@android:drawable/sym_action_chat"
-        android:textColor="#000000"
-        app:drawableTint="#FFFFFF" />
-
-    <TextView
         android:id="@+id/Likes"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="100 likes"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
-        android:textStyle="bold" />
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="match_parent"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:maxLength="200"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@+id/ivImage"
+        tools:layout_editor_absoluteX="0dp"
         tools:text="trying to look cool" />
 
     <TextView
         android:id="@+id/comments"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="View all comments"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/Likes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

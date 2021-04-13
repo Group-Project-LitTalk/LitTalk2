@@ -67,7 +67,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
             if(image != null)
             {
-                Glide.with(context).load(post.getImage().getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, Target.SIZE_ORIGINAL).into(ivImage);
+                Glide.with(context).load(post.getImage().getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, Target.SIZE_ORIGINAL).fitCenter().into(ivImage);
             }
 
         }
