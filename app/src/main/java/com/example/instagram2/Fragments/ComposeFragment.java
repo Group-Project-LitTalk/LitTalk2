@@ -93,7 +93,6 @@ public class ComposeFragment extends Fragment {
 
                     ParseUser currentUser = ParseUser.getCurrentUser();
                     savePostNoPicture(description, currentUser);
-
                     return;
                 }
 
