@@ -89,14 +89,40 @@ public class ComposeFragment extends Fragment {
 
                 if(photoFile == null || ivPostImage.getDrawable() == null)
                 {
-                    Toast.makeText(getContext(), "There is no image", Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(getContext(), "There is no image", Toast.LENGTH_SHORT).show();
+
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+                    savePostNoPicture(description, currentUser);
+
                     return;
                 }
+
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description, currentUser, photoFile);
             }
         });
 
+    }
+
+    private void savePostNoPicture(String description, ParseUser currentUser) {
+        Post post = new Post();
+
+        post.setDescription(description);
+        post.setUser(currentUser);
+
+        post.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null)
+                {
+                    Log.e(TAG, "Error while saving", e);
+                    //      Toast.makeText(MainActivity.this, "error while saving", Toast.LENGTH_SHORT).show();
+                }
+
+                Log.i(TAG, "Post save was successful");
+                etDescription.setText("");
+            }
+        });
     }
 
     private void savePost(String description, ParseUser currentUser, File photoFile) {
