@@ -13,27 +13,27 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.instagram2.MainActivity;
 import com.example.instagram2.Post;
 import com.example.instagram2.R;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
-import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -42,7 +42,8 @@ public class ComposeFragment extends Fragment {
     public static final String TAG = "ComposeFragment";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     private EditText etDescription;
-    private Button btnCaptureImage;
+    private TextView tvCount;
+    private ImageButton ibtnCapture;
     private ImageView ivPostImage;
     private Button btnSubmit;
 
@@ -64,17 +65,34 @@ public class ComposeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         etDescription = view.findViewById(R.id.etDescription);
-        btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
+        tvCount = view.findViewById(R.id.tvCount);
+        ibtnCapture = view.findViewById(R.id.ibtnCapture);
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
-
-        btnCaptureImage.setOnClickListener(new View.OnClickListener() {
+        ibtnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchCamera();
             }
         });
 
+        etDescription.addTextChangedListener(new TextWatcher(){
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d(TAG,"Count: " + etDescription.length());
+                tvCount.setText(etDescription.length()+"/200");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         //queryPosts();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

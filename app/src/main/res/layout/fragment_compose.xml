@@ -9,33 +9,14 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Description..."
-        android:inputType="textPersonName"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnCaptureImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_200"
-        android:text="Take Picture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDescription" />
-
     <ImageView
         android:id="@+id/ivPostImage"
-        android:layout_width="411dp"
-        android:layout_height="199dp"
-        app:layout_constraintTop_toBottomOf="@+id/btnCaptureImage"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:background="#FAFAFA"
+        app:layout_constraintEnd_toEndOf="@+id/etDescription"
+        app:layout_constraintStart_toStartOf="@+id/etDescription"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -44,8 +25,47 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#36CDF3"
         android:text="Submit"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/etDescription"
+        app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+
+    <ImageButton
+        android:id="@+id/ibtnCapture"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/camera"
+        app:layout_constraintStart_toStartOf="@+id/etDescription"
+        app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Post content"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:minLines="1"
+        android:singleLine="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPostImage" />
+
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="0/200"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toEndOf="@+id/ibtnCapture"
+        app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
