@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.Target;
+import com.example.instagram2.BookClasses.BookActivity;
 import com.parse.ParseFile;
 
 
@@ -69,9 +69,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG,"It clicked");
-
-                    Intent i = new Intent(context, RegisterActivity.class);
-
+                    Intent i = new Intent(context, BookActivity.class);
                     context.startActivity(i);
                 }
             });
@@ -87,14 +85,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             {
                 Glide.with(context).load(post.getImage().getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, 100).centerCrop().into(ivImage);
             }
-
         }
-
-
-
-
-
-
-
     }
 }

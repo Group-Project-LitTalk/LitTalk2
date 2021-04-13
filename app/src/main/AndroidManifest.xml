@@ -12,7 +12,6 @@
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
         </intent>
-
     </queries>
 
     <application
@@ -24,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Instagram2"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".BookClasses.BookActivity"></activity>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
