@@ -33,19 +33,23 @@ Google Books api endpoint - https://www.googleapis.com/books/v1
 
 **Required Must-have Stories**
 
-* User can register a new account
-* User can login
-* User can create a post 
-* User can scroll through their feed and view others posts 
-* User can view their own posts on their feed
-* User can view posts on their feed in detail by tapping on them.
-* User can view the popular books in their area
-* User can view the books being read within 1 mile of their location
+- [x] User can register a new account
+- [x] User can login
+- [x] User can create a post 
+- [x] User can scroll through their feed and view others posts 
+- [x] User can view their own posts on their feed
+- [ ] User can view posts on their feed in detail by tapping on them.
+- [ ] User can view the popular books in their area
+- [ ] User can view the books being read within 1 mile of their location
 
 **Optional Nice-to-have Stories**
-* When the user agrees to allow Google Maps access their location they will also see other people who have added books in their location. 
-* Book suggestions by people you follow will be displayed to the users.
-* Improve the user interface through styling and coloring
+- [ ] When the user agrees to allow Google Maps access their location they will also see other people who have added books in their location. 
+- [ ] Book suggestions by people you follow will be displayed to the users.
+- [x] Improve the user interface through styling and coloring
+
+
+### App Walkthough GIF
+<img src='LitTalk Sprint 1 vid.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### 2. Screen Archetypes
 
