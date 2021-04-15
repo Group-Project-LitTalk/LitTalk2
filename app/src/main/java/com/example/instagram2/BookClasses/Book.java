@@ -3,20 +3,29 @@ package com.example.instagram2.BookClasses;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Book {
 
+    String bookId;
     String posterPath;
     String title;
-    String overview;
+    String tvBookDescription;
+    double rating;
+
+    public Book() {
+    }
 
     public Book (JSONObject jsonObject) throws JSONException {
+        bookId = jsonObject.getString("id");
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
-        overview = jsonObject.getString("overview");
+        tvBookDescription = jsonObject.getString("overview");
+        rating = jsonObject.getDouble("rating");
     }
 
     public static List<Book> fromJsonArray(JSONArray bookJsonArray) throws JSONException {
@@ -27,6 +36,8 @@ public class Book {
         return books;
     }
 
+    public String getBookId(){return bookId;}
+
     public String getPosterPath() {
         return String.format( "https://image.tmdb.org/t/p/w342/%s", posterPath);
     }
@@ -35,7 +46,10 @@ public class Book {
         return title;
     }
 
-    public String getOverview() {
-        return overview;
+    public String getTvBookDescription() {
+        return tvBookDescription;
     }
+
+    public double getRating(){return rating;}
+
 }

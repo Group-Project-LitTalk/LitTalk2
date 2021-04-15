@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
                 registerUser(username, password);
             }
         });
+
         tvLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
