@@ -16,6 +16,7 @@ import com.example.instagram2.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import okhttp3.Headers;
@@ -23,10 +24,11 @@ import okhttp3.Headers;
 public class BookActivity extends AppCompatActivity {
 
     public static final String TAG = "BookActivity";
+    public static final String URL = "https://www.googleapis.com/books/v1/volumes/x9x_DwAAQBAJ";
 
     TextView tvRating;
     TextView tvBookDescription;
-    RatingBar ratingBar;
+    //RatingBar ratingBar;
     ImageView ivCover;
     Button btnBookTitle;
 
@@ -37,43 +39,33 @@ public class BookActivity extends AppCompatActivity {
 
         tvRating = findViewById(R.id.tvRating);
         tvBookDescription = findViewById(R.id.tvBookDescription);
-        ratingBar = findViewById(R.id.ratingBar);
+        //ratingBar = findViewById(R.id.ratingBar);
         ivCover = findViewById(R.id.ivCover);
         btnBookTitle = findViewById(R.id.btnBookTitle);
 
-        Book book = Parcels.unwrap(getIntent().getParcelableExtra("book"));
-
-        tvRating.setText(" " + book.getRating());
-        tvBookDescription.setText(book.getTvBookDescription());
-        ratingBar.setRating((float)book.getRating());
+        //tvRating.setText(" " + book.getRating());
+        //tvBookDescription.setText(book.getDescription());
+        //ratingBar.setRating((float)book.getRating());
 
         AsyncHttpClient client = new AsyncHttpClient();
-
-        client.get(book.getBookId(), new JsonHttpResponseHandler() {
+        client.get(URL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
-
                 try {
-                    JSONArray items = json.jsonObject.getJSONArray("items");
-
-                    if(items.length() == 0) return;
+                    JSONObject items = json.jsonObject.getJSONObject("volumeInfo");
+                    Log.d(TAG,json.toString());
+                    Log.d(TAG, String.valueOf(items));
                 }
                 catch (JSONException e) {
                     Log.e(TAG, "Failed to parse JSON", e);
                 }
-
                 Log.d(TAG, "yay");
             }
 
             @Override
             public void onFailure(int i, Headers headers, String s, Throwable throwable) {
-
                 Log.d(TAG, "nay");
             }
         });
-
-
     }
-
-
 }

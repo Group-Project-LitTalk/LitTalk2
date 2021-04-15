@@ -62,7 +62,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         public void bind(Book book) {
             tvUsername.setText(book.getTitle());
             tvTitle.setText(book.getTitle());
-            Glide.with(context).load(book.getPosterPath()).into(ivImage);
+            Glide.with(context).load(book.getCoverPath()).into(ivImage);
         }
     }
 }
