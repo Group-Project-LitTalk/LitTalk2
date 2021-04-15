@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.instagram2.R;
@@ -26,7 +28,6 @@ public class BookActivity extends AppCompatActivity {
     public static final String TAG = "BookActivity";
     public static final String URL = "https://www.googleapis.com/books/v1/volumes/x9x_DwAAQBAJ";
 
-    TextView tvRating;
     TextView tvBookDescription;
     //RatingBar ratingBar;
     ImageView ivCover;
@@ -37,7 +38,6 @@ public class BookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
 
-        tvRating = findViewById(R.id.tvRating);
         tvBookDescription = findViewById(R.id.tvBookDescription);
         //ratingBar = findViewById(R.id.ratingBar);
         ivCover = findViewById(R.id.ivCover);
@@ -55,6 +55,9 @@ public class BookActivity extends AppCompatActivity {
                     JSONObject items = json.jsonObject.getJSONObject("volumeInfo");
                     Log.d(TAG,json.toString());
                     Log.d(TAG, String.valueOf(items));
+                    btnBookTitle.setText(items.getString("title"));
+                    tvBookDescription.setText(items.getString("description"));
+                    Glide.with(BookActivity.this).load(items.getJSONObject("imageLinks").getString("large")).override(ViewGroup.LayoutParams.MATCH_PARENT,250).into(ivCover);
                 }
                 catch (JSONException e) {
                     Log.e(TAG, "Failed to parse JSON", e);
