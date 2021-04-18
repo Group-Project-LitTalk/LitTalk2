@@ -26,7 +26,7 @@ import okhttp3.Headers;
 public class BookActivity extends AppCompatActivity {
 
     public static final String TAG = "BookActivity";
-    public static final String URL = "https://www.googleapis.com/books/v1/volumes/x9x_DwAAQBAJ";
+    public static final String URL = "https://www.googleapis.com/books/v1/volumes/";
 
     TextView tvBookDescription;
     //RatingBar ratingBar;
@@ -46,9 +46,10 @@ public class BookActivity extends AppCompatActivity {
         //tvRating.setText(" " + book.getRating());
         //tvBookDescription.setText(book.getDescription());
         //ratingBar.setRating((float)book.getRating());
+        String book_id = getIntent().getStringExtra("Book_ID");
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(URL, new JsonHttpResponseHandler() {
+        client.get(URL + book_id, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
                 try {

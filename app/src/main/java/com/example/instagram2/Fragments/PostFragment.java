@@ -78,7 +78,7 @@ public class PostFragment extends Fragment {
 
                 for(Post post : posts)
                 {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername() + " ,Time: " + post.getCreatedAt());
                 }
 
                 allPosts.addAll(posts);
