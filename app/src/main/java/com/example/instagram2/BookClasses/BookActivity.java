@@ -33,6 +33,7 @@ public class BookActivity extends AppCompatActivity {
     ImageView ivCover;
     Button btnBookTitle;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
