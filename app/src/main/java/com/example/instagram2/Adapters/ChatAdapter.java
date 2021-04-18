@@ -1,4 +1,4 @@
-package com.example.instagram2;
+package com.example.instagram2.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagram2.Message;
+import com.example.instagram2.R;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

@@ -55,11 +55,10 @@ public class BookActivity extends AppCompatActivity {
             public void onSuccess(int i, Headers headers, JSON json) {
                 try {
                     JSONObject items = json.jsonObject.getJSONObject("volumeInfo");
-                    Log.d(TAG,json.toString());
-                    Log.d(TAG, String.valueOf(items));
                     btnBookTitle.setText(items.getString("title"));
                     tvBookDescription.setText(items.getString("description"));
-                    Glide.with(BookActivity.this).load(items.getJSONObject("imageLinks").getString("large")).override(ViewGroup.LayoutParams.MATCH_PARENT,250).into(ivCover);
+                    Glide.with(BookActivity.this).load(items.getJSONObject("imageLinks").getString("large"))
+                            .override(ViewGroup.LayoutParams.MATCH_PARENT,150).into(ivCover);
                 }
                 catch (JSONException e) {
                     Log.e(TAG, "Failed to parse JSON", e);
