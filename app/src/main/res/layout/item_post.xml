@@ -78,7 +78,7 @@
         android:clickable="true"
         android:text="BookTitle"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#9E9C9C"
+        android:textColor="#2B2B2B"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/ivImage"
         app:layout_constraintStart_toEndOf="@+id/tvUsername"

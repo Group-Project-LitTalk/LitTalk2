@@ -82,9 +82,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ParseFile image = post.getImage();
 
             if(image != null)
-            {
                 Glide.with(context).load(post.getImage().getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, 100).centerCrop().into(ivImage);
-            }
         }
     }
 }
