@@ -1,4 +1,4 @@
-package com.example.instagram2;
+package com.example.instagram2.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram2.BookClasses.BookActivity;
+import com.example.instagram2.ChatActivity;
+import com.example.instagram2.Post;
+import com.example.instagram2.R;
+import com.example.instagram2.TimeFormatter;
 import com.parse.ParseFile;
 
 
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
@@ -57,6 +63,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private ImageView ivImage;
         private TextView tvDescription;
         private TextView tvTitle;
+        private TextView tvTime;
+        private TextView tvReply;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,12 +72,21 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvTitle = itemView.findViewById(R.id.tvBookTitle);
+            tvTime = itemView.findViewById(R.id.tvTime);
+            tvReply = itemView.findViewById(R.id.tvReply);
 
             tvTitle.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG,"It clicked");
                     Intent i = new Intent(context, BookActivity.class);
+                    i.putExtra("Book_ID", "x9x_DwAAQBAJ");
+                    context.startActivity(i);
+                }
+            });
+            tvReply.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, ChatActivity.class);
                     context.startActivity(i);
                 }
             });
@@ -80,9 +97,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
             ParseFile image = post.getImage();
-
+            tvTime.setText(getDate(post));
+            //tvTime.setText((CharSequence) post.getCreatedAt());
             if(image != null)
                 Glide.with(context).load(post.getImage().getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, 100).centerCrop().into(ivImage);
+        }
+
+        private String getDate(Post post){
+            Date date = post.getCreatedAt();
+            DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
+            String time = TimeFormatter.getTimeDifference(df.format(date));
+            return time;
         }
     }
 }

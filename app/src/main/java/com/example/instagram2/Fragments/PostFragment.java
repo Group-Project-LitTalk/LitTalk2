@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.instagram2.Post;
-import com.example.instagram2.PostsAdapter;
+import com.example.instagram2.Adapters.PostsAdapter;
 import com.example.instagram2.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -78,7 +78,7 @@ public class PostFragment extends Fragment {
 
                 for(Post post : posts)
                 {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername() + " ,Time: " + post.getCreatedAt());
                 }
 
                 allPosts.addAll(posts);
