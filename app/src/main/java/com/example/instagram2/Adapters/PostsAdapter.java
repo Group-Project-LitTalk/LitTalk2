@@ -21,7 +21,12 @@ import com.example.instagram2.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 
 import java.text.DateFormat;
@@ -97,13 +102,35 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     //tvPost.setText((CharSequence) tvDescription);
                 }
             });
+
             btnDelete.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG,"The inner workings of android are an enigma");
+                    //Log.d(TAG,"The inner workings of android are an enigma");
+
+                    ParseQuery<ParseObject> posts = ParseQuery.getQuery("Post");
+
+                    posts.findInBackground(new FindCallback<ParseObject>() {
+                        @Override
+                        public void done(List<ParseObject> objects, ParseException e) {
+                            if(e == null)
+                            {
+                                posts.get(0).deleteInBackground(new DeleteCallback() {
+                                    @Override
+                                    public void done(ParseException e) {
+                                        if(e == null) { //success
+                                             }
+
+                                            else { //failed
+                                                 }
+
+                                    }
+                                });
+                            } else {
+
+                            }
+                        };
                 }
-            });
-        }
 
         public void bind(Post post) {
 
