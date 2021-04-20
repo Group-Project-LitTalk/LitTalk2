@@ -40,8 +40,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     private List<Post> posts;
     public static final String TAG = "PostsAdapter";
 
-    public PostsAdapter(Context context, List<Post> posts)
-    {
+    public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
         this.posts = posts;
     }
@@ -85,7 +84,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvReply = itemView.findViewById(R.id.tvReply);
             btnDelete = itemView.findViewById(R.id.btnDelete);
 
-            tvTitle.setOnClickListener(new View.OnClickListener(){
+            tvTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(context, BookActivity.class);
@@ -94,7 +93,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
-            tvReply.setOnClickListener(new View.OnClickListener(){
+            tvReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(context, ChatActivity.class);
@@ -103,7 +102,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
-            btnDelete.setOnClickListener(new View.OnClickListener(){
+            btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Log.d(TAG,"The inner workings of android are an enigma");
@@ -113,24 +112,24 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     posts.findInBackground(new FindCallback<ParseObject>() {
                         @Override
                         public void done(List<ParseObject> objects, ParseException e) {
-                            if(e == null)
-                            {
+                            if (e == null) {
                                 posts.get(0).deleteInBackground(new DeleteCallback() {
                                     @Override
                                     public void done(ParseException e) {
-                                        if(e == null) { //success
-                                             }
-
-                                            else { //failed
-                                                 }
+                                        if (e == null) { //success
+                                        } else { //failed
+                                        }
 
                                     }
                                 });
                             } else {
 
                             }
-                        };
+                        }
+                    }
                 }
+            }
+        }
 
         public void bind(Post post) {
 
@@ -139,12 +138,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ParseFile image = post.getImage();
             tvTime.setText(getDate(post));
             //tvTime.setText((CharSequence) post.getCreatedAt());
-            if(image != null)
+            if (image != null)
                 Glide.with(context).load(post.getImage().getUrl())
                         .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
         }
 
-        private String getDate(Post post){
+        private String getDate(Post post) {
             Date date = post.getCreatedAt();
             DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
             String time = TimeFormatter.getTimeDifference(df.format(date));
@@ -152,3 +151,5 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         }
     }
 }
+
+
