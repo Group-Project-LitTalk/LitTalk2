@@ -43,5 +43,9 @@ public class Post extends ParseObject  {
         put(KEY_USER, user);
     }
 
+    public  String getObjectId() {
+        return OBJECT_ID;
+    }
+
 
 }

@@ -102,33 +102,34 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
-            /*btnDelete.setOnClickListener(new View.OnClickListener() {
+        }
+
+        public void helpDelete(String objectId)
+        {
+            ParseQuery<ParseObject> posts = ParseQuery.getQuery("Post");
+            // Query parameters based on the item name
+            posts.whereEqualTo("objectId", objectId);
+
+            posts.findInBackground(new FindCallback<ParseObject>() {
                 @Override
-                public void onClick(View v) {
-                    //Log.d(TAG,"The inner workings of android are an enigma");
-
-                    ParseQuery<ParseObject> posts = ParseQuery.getQuery("Post");
-
-                    posts.findInBackground(new FindCallback<ParseObject>() {
-                        @Override
-                        public void done(List<ParseObject> objects, ParseException e) {
-                            if (e == null) {
-                                posts.get(0).deleteInBackground(new DeleteCallback() {
-                                    @Override
-                                    public void done(ParseException e) {
-                                        if (e == null) { //success
-                                        } else { //failed
-                                        }
-
-                                    }
-                                });
-                            } else {
-
+                public void done(final List<ParseObject> post, ParseException e) {
+                    if (e == null) {
+                        post.get(0).deleteInBackground(new DeleteCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    // Success
+                                } else {
+                                    // Failed
+                                }
                             }
-                        }
+                        });
+                    } else {
+                        // Something is wrong
                     }
-                }
-            }*/
+                };
+            });
+
         }
 
         public void bind(Post post) {
@@ -137,10 +138,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername.setText(post.getUser().getUsername());
             ParseFile image = post.getImage();
             tvTime.setText(getDate(post));
+
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helpDelete(post.getObjectId());
+                }
+            });
+
             //tvTime.setText((CharSequence) post.getCreatedAt());
             if (image != null)
                 Glide.with(context).load(post.getImage().getUrl())
                         .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
+
         }
 
         private String getDate(Post post) {
