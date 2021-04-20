@@ -40,7 +40,7 @@ public class Post extends ParseObject  {
     {
         put(KEY_BOOK_TITLE, bookTitle);
     }
-
+//These are to keep
     public ParseFile getImage()
     {
         return getParseFile(KEY_IMAGE);
