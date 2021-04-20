@@ -11,16 +11,34 @@ public class Post extends ParseObject  {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
     public static final String KEY_CREATED_KEY = "createdAt";
+    public static final String KEY_BOOK_ID = "BookID";
+    public static final String KEY_BOOK_TITLE = "BookTitle";
     public static final String OBJECT_ID = "objectId";
 
     public String getDescription()
     {
         return getString(KEY_DESCRIPTION);
     }
-
     public void setDescription(String description)
     {
         put(KEY_DESCRIPTION, description);
+    }
+
+    public String getKeyBookId(){
+        return getString(KEY_BOOK_TITLE);
+    }
+    public void setBookId(String bookId)
+    {
+        put(KEY_BOOK_ID, bookId);
+    }
+
+    public String getKeyBookTitle()
+    {
+        return getString(KEY_BOOK_TITLE);
+    }
+    public void setBookTitle(String bookTitle)
+    {
+        put(KEY_BOOK_TITLE, bookTitle);
     }
 
     public ParseFile getImage()
@@ -46,6 +64,5 @@ public class Post extends ParseObject  {
     public  String getObjectId() {
         return OBJECT_ID;
     }
-
 
 }
