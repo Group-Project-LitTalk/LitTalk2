@@ -48,6 +48,7 @@ public class ComposeFragment extends Fragment {
     private EditText etDescription;
     private Button btnSearch;
     private TextView tvCount;
+    private TextView tvTitle;
     private ImageButton ibtnCapture;
     private ImageView ivPostImage;
     private Button btnSubmit;
@@ -71,16 +72,23 @@ public class ComposeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         etDescription = view.findViewById(R.id.etDescription);
         tvCount = view.findViewById(R.id.tvCount);
+        tvTitle = view.findViewById(R.id.tvTitle);
         ibtnCapture = view.findViewById(R.id.ibtnCapture);
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
+
+        String bookID = getActivity().getIntent().getStringExtra("ID");
+        String bookTitle = getActivity().getIntent().getStringExtra("Title");
+        if(bookTitle != null){
+            tvTitle.setText(bookTitle);
+        } else {tvTitle.setText("Nothing selected");}
+
         ibtnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchCamera();
             }
         });
-
         etDescription.addTextChangedListener(new TextWatcher(){
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

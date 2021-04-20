@@ -102,7 +102,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
-            btnDelete.setOnClickListener(new View.OnClickListener() {
+            /*btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Log.d(TAG,"The inner workings of android are an enigma");
@@ -128,7 +128,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                         }
                     }
                 }
-            }
+            }*/
         }
 
         public void bind(Post post) {

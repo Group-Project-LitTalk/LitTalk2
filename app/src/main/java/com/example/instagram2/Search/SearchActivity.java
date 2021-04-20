@@ -73,6 +73,7 @@ public class SearchActivity extends AppCompatActivity {
                         try {
                             Log.d(TAG, json.jsonObject.getString("totalItems"));
                             Log.d(TAG, json.jsonObject.getJSONArray("items").getString(1));
+                            allBooks.clear();
                             allBooks.addAll(Book.fromJsonArray(json.jsonObject.getJSONArray("items")));
                             adapter.notifyDataSetChanged();
                         } catch (JSONException e) {

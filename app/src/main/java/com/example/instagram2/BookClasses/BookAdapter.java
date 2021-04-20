@@ -1,6 +1,7 @@
 package com.example.instagram2.BookClasses;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagram2.ChatActivity;
+import com.example.instagram2.Fragments.ComposeFragment;
+import com.example.instagram2.MainActivity;
 import com.example.instagram2.R;
 
 import java.util.ArrayList;
@@ -60,17 +64,21 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             tvTitle = itemView.findViewById(R.id.tvBookTitle);
             ivImage = itemView.findViewById(R.id.ivThumbnail);
             btnAdd = itemView.findViewById(R.id.btnAdd);
-            btnAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
         }
 
         public void bind(Book book) {
             tvTitle.setText(book.getTitle());
             Glide.with(context).load(book.getCoverPath()).into(ivImage);
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, MainActivity.class);
+                    i.putExtra("ID",book.BookId);
+                    i.putExtra("Title",book.getTitle());
+                    context.startActivity(i);
+                }
+            });
         }
     }
 
