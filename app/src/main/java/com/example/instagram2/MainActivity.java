@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton logOut;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

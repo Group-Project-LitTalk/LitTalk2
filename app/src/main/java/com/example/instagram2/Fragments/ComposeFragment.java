@@ -1,5 +1,6 @@
 package com.example.instagram2.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,8 +27,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.instagram2.BookClasses.BookActivity;
 import com.example.instagram2.Post;
 import com.example.instagram2.R;
+import com.example.instagram2.Search.SearchActivity;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -41,7 +44,9 @@ public class ComposeFragment extends Fragment {
 
     public static final String TAG = "ComposeFragment";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+
     private EditText etDescription;
+    private Button btnSearch;
     private TextView tvCount;
     private ImageButton ibtnCapture;
     private ImageView ivPostImage;
@@ -116,6 +121,15 @@ public class ComposeFragment extends Fragment {
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description, currentUser, photoFile);
+            }
+        });
+        //Open Search activity to add and select books
+        btnSearch = view.findViewById(R.id.btnSearch);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -214,4 +228,5 @@ public class ComposeFragment extends Fragment {
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
 
     }
+
 }

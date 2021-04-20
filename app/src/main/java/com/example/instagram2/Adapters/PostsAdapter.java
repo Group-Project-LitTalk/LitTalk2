@@ -100,7 +100,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvTime.setText(getDate(post));
             //tvTime.setText((CharSequence) post.getCreatedAt());
             if(image != null)
-                Glide.with(context).load(post.getImage().getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, 100).centerCrop().into(ivImage);
+                Glide.with(context).load(post.getImage().getUrl())
+                        .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
         }
 
         private String getDate(Post post){

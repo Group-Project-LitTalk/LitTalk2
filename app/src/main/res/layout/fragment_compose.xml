@@ -58,24 +58,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPostImage" />
 
-    <EditText
-        android:id="@+id/etDescription2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Book Title"
-        android:inputType="textMultiLine"
-        android:maxLines="5"
-        android:minLines="1"
-        android:singleLine="false"
-        app:layout_constraintBottom_toTopOf="@+id/etDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivPostImage" />
-
     <TextView
         android:id="@+id/tvCount"
         android:layout_width="wrap_content"
@@ -86,5 +68,27 @@
         app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
         app:layout_constraintStart_toEndOf="@+id/ibtnCapture"
         app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_book"
+        app:layout_constraintBottom_toTopOf="@+id/etDescription"
+        app:layout_constraintStart_toStartOf="@+id/ivPostImage"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostImage" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:minLines="1"
+        android:text="Selected book name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/etDescription"
+        app:layout_constraintEnd_toEndOf="@+id/ivPostImage"
+        app:layout_constraintStart_toEndOf="@+id/btnSearch"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
