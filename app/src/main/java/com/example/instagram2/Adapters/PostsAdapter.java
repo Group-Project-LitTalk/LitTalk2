@@ -23,6 +23,7 @@ import com.example.instagram2.TimeFormatter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -39,6 +40,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     private Context context;
     private List<Post> posts;
     public static final String TAG = "PostsAdapter";
+    protected PostsAdapter adapter;
 
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
@@ -120,7 +122,26 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     }
                 };
             });
+            
+        }
 
+        public void replyPost(String objectId)
+        {
+            ParseQuery<ParseObject> post = ParseQuery.getQuery("Post");
+            // Retrieve the object by id
+            post.getInBackground(objectId, new GetCallback<ParseObject>() {
+                public void done(ParseObject player, ParseException e) {
+                    if (e == null) {
+                        // Now let's update it with some new data. In this case, only cheatMode and score
+                        // will get sent to the Parse Cloud. playerName hasn't changed.
+                        player.put("yearOfBirth", 1998);
+                        player.put("emailContact", "a.wed@domain.io");
+                        player.saveInBackground();
+                    } else {
+                        // Failed
+                    }
+                }
+            });
         }
 
         public void bind(Post post) {
@@ -137,6 +158,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     Log.d(TAG, "Object ID : " + post.getObjectId());
 
                     helpDelete(post.getObjectId());
+
+                    notifyDataSetChanged();
                 }
             });
 
