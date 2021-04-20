@@ -13,7 +13,6 @@ public class Post extends ParseObject  {
     public static final String KEY_CREATED_KEY = "createdAt";
     public static final String KEY_BOOK_ID = "BookID";
     public static final String KEY_BOOK_TITLE = "BookTitle";
-    public static final String OBJECT_ID = "objectId";
 
     public String getDescription()
     {
@@ -40,7 +39,7 @@ public class Post extends ParseObject  {
     {
         put(KEY_BOOK_TITLE, bookTitle);
     }
-//These are to keep
+
     public ParseFile getImage()
     {
         return getParseFile(KEY_IMAGE);
@@ -61,8 +60,5 @@ public class Post extends ParseObject  {
         put(KEY_USER, user);
     }
 
-    public  String getObjectId() {
-        return OBJECT_ID;
-    }
 
 }

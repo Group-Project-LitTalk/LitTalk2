@@ -16,8 +16,10 @@ import android.view.ViewGroup;
 import com.example.instagram2.Post;
 import com.example.instagram2.Adapters.PostsAdapter;
 import com.example.instagram2.R;
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class PostFragment extends Fragment {
     public static final String TAG = "PostFragment";
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
-    protected List<Post> allPosts;
+    protected List <Post> allPosts;
 
     public PostFragment() {
         // Required empty public constructor
@@ -86,6 +88,35 @@ public class PostFragment extends Fragment {
             }
         });
 
+
+
+    }
+
+    public void helpDelete(String objectId)
+    {
+        ParseQuery <ParseObject> posts = ParseQuery.getQuery("PostFragment");
+        // Query parameters based on the item name
+        posts.whereEqualTo("objectId", objectId);
+
+        posts.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(final List <ParseObject> player, ParseException e) {
+                if (e == null) {
+                    player.get(0).deleteInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                // Success
+                            } else {
+                                // Failed
+                            }
+                        }
+                    });
+                } else {
+                    // Something is wrong
+                }
+            };
+        });
 
     }
 

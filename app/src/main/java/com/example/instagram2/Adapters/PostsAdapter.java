@@ -97,15 +97,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         public void helpDelete(String objectId)
         {
-            ParseQuery<ParseObject> posts = ParseQuery.getQuery("Post");
+            ParseQuery <ParseObject> posts = ParseQuery.getQuery("Post");
             // Query parameters based on the item name
             posts.whereEqualTo("objectId", objectId);
 
             posts.findInBackground(new FindCallback<ParseObject>() {
                 @Override
-                public void done(final List<ParseObject> post, ParseException e) {
+                public void done(final List <ParseObject> player, ParseException e) {
                     if (e == null) {
-                        post.get(0).deleteInBackground(new DeleteCallback() {
+                        player.get(0).deleteInBackground(new DeleteCallback() {
                             @Override
                             public void done(ParseException e) {
                                 if (e == null) {
@@ -134,6 +134,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d(TAG, "Object ID : " + post.getObjectId());
+
                     helpDelete(post.getObjectId());
                 }
             });
