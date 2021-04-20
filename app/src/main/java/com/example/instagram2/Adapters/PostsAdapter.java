@@ -84,15 +84,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvReply = itemView.findViewById(R.id.tvReply);
             btnDelete = itemView.findViewById(R.id.btnDelete);
 
-            tvTitle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(context, BookActivity.class);
-                    i.putExtra("Book_ID", "x9x_DwAAQBAJ");
-                    context.startActivity(i);
-                }
-            });
-
             tvReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -138,6 +129,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername.setText(post.getUser().getUsername());
             ParseFile image = post.getImage();
             tvTime.setText(getDate(post));
+            tvTitle.setText(post.getKeyBookTitle());
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -146,6 +138,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
+            tvTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, BookActivity.class);
+                    i.putExtra("Book_ID", post.getKeyBookId());
+                    context.startActivity(i);
+                }
+            });
 
             if (image != null)
                 Glide.with(context).load(post.getImage().getUrl())
