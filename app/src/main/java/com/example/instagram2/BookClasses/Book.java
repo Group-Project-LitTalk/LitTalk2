@@ -1,5 +1,7 @@
 package com.example.instagram2.BookClasses;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,19 +14,26 @@ public class Book {
     String coverPath;
     String title;
     String description;
-    //double rating;
+    String author;
+    String BookId;
+
+
 
     public Book() {
     }
 
     public Book (JSONObject jsonObject) throws JSONException {
-        coverPath = jsonObject.getString("thumbnail");
-        title = jsonObject.getString("title");
-        description = jsonObject.getString("description");
-        //rating = jsonObject.getDouble("rating");
+        JSONObject volumeInfo = jsonObject.getJSONObject("volumeInfo");
+
+        coverPath = volumeInfo.getJSONObject("imageLinks").getString("thumbnail");
+        title = volumeInfo.getString("title");
+        BookId = jsonObject.getString("id");
+        //description = volumeInfo.getString("description");
+        //author = volumeInfo.getJSONArray("author").getString(0);
     }
 
     public static List<Book> fromJsonArray(JSONArray bookJsonArray) throws JSONException {
+        Log.d("Book","JSON ARRAY RECEIVED: " + bookJsonArray.toString());
         List<Book> books = new ArrayList<>();
         for (int i = 0; i< bookJsonArray.length(); i++){
             books.add(new Book( bookJsonArray.getJSONObject(i)));
@@ -39,11 +48,14 @@ public class Book {
     public String getTitle() {
         return title;
     }
-
     public String getDescription() {
         return description;
     }
-
-    //public double getRating(){return rating;}
+    public String getAuthor() {
+        return author;
+    }
+    public String getBookId() {
+        return BookId;
+    }
 
 }

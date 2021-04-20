@@ -54,10 +54,10 @@ public class BookActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
                 try {
-                    JSONObject items = json.jsonObject.getJSONObject("volumeInfo");
-                    btnBookTitle.setText(items.getString("title"));
-                    tvBookDescription.setText(items.getString("description"));
-                    Glide.with(BookActivity.this).load(items.getJSONObject("imageLinks").getString("large"))
+                    JSONObject volumeInfo = json.jsonObject.getJSONObject("volumeInfo");
+                    btnBookTitle.setText(volumeInfo.getString("title"));
+                    tvBookDescription.setText(volumeInfo.getString("description"));
+                    Glide.with(BookActivity.this).load(volumeInfo.getJSONObject("imageLinks").getString("large"))
                             .override(ViewGroup.LayoutParams.MATCH_PARENT,150).into(ivCover);
                 }
                 catch (JSONException e) {

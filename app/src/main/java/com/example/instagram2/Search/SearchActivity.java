@@ -2,77 +2,107 @@ package com.example.instagram2.Search;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.instagram2.Adapters.PostsAdapter;
+import com.example.instagram2.BookClasses.Book;
+import com.example.instagram2.BookClasses.BookAdapter;
+import com.example.instagram2.Post;
 import com.example.instagram2.R;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import okhttp3.Headers;
 
 public class SearchActivity extends AppCompatActivity {
 
-    ListView listView;
-    ArrayList<String> stringArrayList = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    RecyclerView rvSearch;
+    EditText etSearch;
+    protected BookAdapter adapter;
+    List<Book> allBooks;
+    public static final String URL = "https://www.googleapis.com/books/v1/volumes?q=";
+    public static final String TAG = "SearchActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        listView = findViewById(R.id.lvSearch);
+        rvSearch = findViewById(R.id.rvSearch);
+        etSearch = findViewById(R.id.etSearch);
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        // Add sample data
-        for (int i=0; i<=100; i++){
-            stringArrayList.add("Item " + i);
-        }
-        //initialize the adapter
-        adapter = new ArrayAdapter<>(SearchActivity.this
-                , android.R.layout.simple_list_item_1,stringArrayList);
-        //Set adapter on list view
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            }
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Display click item position in toast
-                Toast.makeText(getApplicationContext(),adapter.getItem(position),Toast.LENGTH_SHORT).show();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.get(URL+s, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON json) {
+                        Log.d(TAG, "The JSONObject is as follows..." + json.toString());
+                        try {
+                            Log.d(TAG, json.jsonObject.getString("totalItems"));
+                            Log.d(TAG, json.jsonObject.getJSONArray("items").getString(1));
+                            allBooks.addAll(Book.fromJsonArray(json.jsonObject.getJSONArray("items")));
+                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        Log.e(TAG, "Error Response", throwable);
+                    }
+                });
+                filter(s.toString());
             }
         });
+
+        allBooks = new ArrayList<>();
+        adapter = new BookAdapter(SearchActivity.this, allBooks);
+
+        rvSearch.setAdapter(adapter);
+
+        rvSearch.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
+
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Initialize menu inflater
-        MenuInflater menuInflater = getMenuInflater();
-        //Inflate menu
-        menuInflater.inflate(R.menu.menu_search,menu);
-        //Initialize menu item
-        MenuItem menuItem = menu.findItem(R.id.search_view);
-        //Initialize search view
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+    private void filter(String text){
+        ArrayList<Book> filteredList = new ArrayList<>();
+        for (Book item : allBooks) {
+            if(item.getTitle().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
             }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //Filter array list
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
+        }
+        adapter.filterList(filteredList);
     }
 }

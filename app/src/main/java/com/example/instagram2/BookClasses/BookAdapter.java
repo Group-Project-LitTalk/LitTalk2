@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.instagram2.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
@@ -30,7 +32,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("BookAdapter", "onCreateViewHolder");
-        View bookView = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
+        View bookView = LayoutInflater.from(context).inflate(R.layout.item_book, parent, false);
         return new ViewHolder(bookView);
     }
 
@@ -50,20 +52,31 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;
-        TextView tvUsername;
         ImageView ivImage;
+        Button btnAdd;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvDescription);
-            ivImage = itemView.findViewById(R.id.ivImage);
+            tvTitle = itemView.findViewById(R.id.tvBookTitle);
+            ivImage = itemView.findViewById(R.id.ivThumbnail);
+            btnAdd = itemView.findViewById(R.id.btnAdd);
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
         public void bind(Book book) {
-            tvUsername.setText(book.getTitle());
             tvTitle.setText(book.getTitle());
             Glide.with(context).load(book.getCoverPath()).into(ivImage);
         }
+    }
+
+    public void filterList(ArrayList<Book> filteredList){
+        books = filteredList;
+        notifyDataSetChanged();
     }
 }
 
