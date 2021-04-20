@@ -4,24 +4,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.instagram2.Adapters.ChatAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.livequery.ParseLiveQueryClient;
 import com.parse.livequery.SubscriptionHandling;
+
+import org.parceler.Parcels;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +48,19 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView rvChat;
     ArrayList<Message> mMessages;
     ChatAdapter mAdapter;
+    TextView tvPost;
 
     boolean mFirstLoad;
 
     EditText etMessage;
     ImageButton btSend;
+
+    int contextMenuIndexClicked = -1;
+    boolean isEditMode = false;
+    Message editMessage;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,13 +109,47 @@ public class ChatActivity extends AppCompatActivity {
         etMessage = (EditText) findViewById(R.id.etMessage);
         btSend = (ImageButton) findViewById(R.id.btSend);
         rvChat = (RecyclerView) findViewById(R.id.rvChat);
+
+        tvPost = (TextView) findViewById(R.id.tvPost);
+
+        //
+
+         /*
+
+                     ParseQuery<ParseObject> soccerPlayers = ParseQuery.getQuery("SoccerPlayers");
+            // Query parameters based on the item name
+            soccerPlayers.whereEqualTo("objectId", "QHjRWwgEtd");
+            soccerPlayers.findInBackground(new FindCallback<ParseObject>() {
+              @Override
+              public void done(final List<ParseObject> player, ParseException e) {
+                if (e == null) {
+                  player.get(0).deleteInBackground(new DeleteCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                      if (e == null) {
+                        // Success
+                      } else {
+                        // Failed
+                      }
+                    }
+                  });
+                } else {
+                  // Something is wrong
+                }
+              };
+            }
+
+          */
+
+
+
+        //
+
         mMessages = new ArrayList<>();
         mFirstLoad = true;
         final String userId = ParseUser.getCurrentUser().getObjectId();
         mAdapter = new ChatAdapter(ChatActivity.this, userId, mMessages);
         rvChat.setAdapter(mAdapter);
-
-
 
         // associate the LayoutManager with the RecylcerView
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatActivity.this);

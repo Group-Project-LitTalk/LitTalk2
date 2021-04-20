@@ -39,6 +39,8 @@
         android:id="@+id/Likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
         android:padding="3dp"
         android:text="100 likes"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -66,13 +68,15 @@
         android:id="@+id/comments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:padding="3dp"
         android:text="View all comments"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        app:layout_constraintVertical_bias="0.184" />
 
     <TextView
         android:id="@+id/tvPostTitle"
@@ -102,6 +106,7 @@
         android:id="@+id/tvReply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:clickable="true"
         android:paddingRight="5dp"
         android:text="Reply Post"
@@ -110,7 +115,8 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Likes" />
+        app:layout_constraintTop_toTopOf="@+id/Likes"
+        app:layout_constraintVertical_bias="0.186" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -121,5 +127,14 @@
         app:layout_constraintEnd_toStartOf="@+id/tvTime"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/clock" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="DELETE"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="307dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

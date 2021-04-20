@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"
-        android:transcriptMode="alwaysScroll"
-        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="345dp"
+        android:layout_above="@+id/rlSend"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_above="@+id/rlSend"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_marginRight="0dp"
+        android:transcriptMode="alwaysScroll" />
     <RelativeLayout
         android:id="@+id/rlSend"
         android:layout_alignParentBottom="true"
@@ -42,5 +44,13 @@
             android:contentDescription="@string/send"
             android:src="@drawable/ic_baseline_send_24"
             android:textSize="18sp" />
+
+
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvPost"
+        android:layout_width="match_parent"
+        android:layout_height="196dp" />
+
 </RelativeLayout>

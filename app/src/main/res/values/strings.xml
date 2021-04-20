@@ -8,4 +8,9 @@
 
     <string name="profile_me">My Profile Pic</string>
     <string name="profile_other">Other profile pic</string>
+
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <!-- Change the following strings as required -->
+    <string name="back4app_app_id">UNkn7D61Ce0erEA179pC4IrhDYN0caH1gDgP09aI</string>
+    <string name="back4app_client_key">cn3B5dzZGjrKuzosUWZ0wvEnPvlnF8iYEaEw2e0H</string>
 </resources>

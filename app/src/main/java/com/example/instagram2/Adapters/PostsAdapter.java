@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.instagram2.BookClasses.BookActivity;
 import com.example.instagram2.ChatActivity;
+import com.example.instagram2.MainActivity;
 import com.example.instagram2.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.ParseFile;
 
 
@@ -64,6 +67,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvTitle;
         private TextView tvTime;
         private TextView tvReply;
+        private Button btnDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +77,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvTitle = itemView.findViewById(R.id.tvPostTitle);
             tvTime = itemView.findViewById(R.id.tvTime);
             tvReply = itemView.findViewById(R.id.tvReply);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
 
             tvTitle.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -82,14 +87,50 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     context.startActivity(i);
                 }
             });
+
             tvReply.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(context, ChatActivity.class);
                     context.startActivity(i);
+                    //tvPost.setText((CharSequence) tvDescription);
                 }
             });
         }
+
+        btnDelete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, MainActivity.class);
+                context.startActivity(i);
+
+                /*
+                ParseQuery<ParseObject> posts = ParseQuery.getQuery("Post");
+                // Query parameters based on the item name
+                posts.whereEqualTo("objectId", "QHjRWwgEtd");
+                posts.findInBackground(new FindCallback<ParseObject>() {
+                  @Override
+                  public void done(final List<ParseObject> post, ParseException e) {
+                    if (e == null) {
+                      post.get(0).deleteInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                          if (e == null) {
+                            // Success
+                          } else {
+                            // Failed
+                          }
+                        }
+                      });
+                    } else {
+                      // Something is wrong
+                    }
+                  };
+                }
+                 */
+            }
+        });
+    }
 
         public void bind(Post post) {
 

@@ -1,6 +1,8 @@
 package com.example.instagram2.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagram2.BookClasses.BookActivity;
+import com.example.instagram2.ChatActivity;
+import com.example.instagram2.LoginActivity;
 import com.example.instagram2.Message;
+import com.example.instagram2.Post;
 import com.example.instagram2.R;
+import com.example.instagram2.TimeFormatter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
@@ -40,18 +53,22 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         }
 
         abstract void bindMessage(Message message);
+
+
     }
 
     public class IncomingMessageViewHolder extends MessageViewHolder {
         ImageView imageOther;
         TextView body;
         TextView name;
-
+        TextView tvPost;
+        
         public IncomingMessageViewHolder(View itemView) {
             super(itemView);
             imageOther = (ImageView)itemView.findViewById(R.id.ivProfileOther);
             body = (TextView)itemView.findViewById(R.id.tvBody);
             name = (TextView)itemView.findViewById(R.id.tvName);
+            tvPost = (TextView) itemView.findViewById(R.id.tvPost);
         }
 
         @Override
@@ -62,6 +79,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                     .into(imageOther);
             body.setText(message.getBody());
             name.setText(message.getUserId()); // in addition to message show user ID
+          //  tvPost.setText(PostsAdapter.tvDescription);
         }
     }
 
@@ -83,6 +101,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                     .into(imageMe);
             body.setText(message.getBody());
         }
+
+
     }
 
     private static String getProfileUrl(final String userId) {
@@ -124,6 +144,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     public void onBindViewHolder(MessageViewHolder holder, int position) {
         Message message = mMessages.get(position);
         holder.bindMessage(message);
+
     }
 
     @Override
@@ -139,5 +160,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         Message message = mMessages.get(position);
         return message.getUserId() != null && message.getUserId().equals(mUserId);
     }
-
 }
+
+
