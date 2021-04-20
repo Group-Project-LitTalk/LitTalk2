@@ -38,7 +38,8 @@ Google Books api endpoint - https://www.googleapis.com/books/v1
 - [x] User can create a post 
 - [x] User can scroll through their feed and view others posts 
 - [x] User can view their own posts on their feed
-- [ ] User can view posts on their feed in detail by tapping on them.
+- [x] User can view posts on their feed in detail by tapping on them.
+- [x] User can reply posts on their feed.
 - [ ] User can view the popular books in their area
 - [ ] User can view the books being read within 1 mile of their location
 
