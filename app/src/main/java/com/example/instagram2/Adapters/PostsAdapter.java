@@ -2,6 +2,7 @@ package com.example.instagram2.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,9 +97,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     //tvPost.setText((CharSequence) tvDescription);
                 }
             });
+            btnDelete.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG,"The inner workings of android are an enigma");
+                }
+            });
         }
-
-
 
         public void bind(Post post) {
 
