@@ -32,6 +32,7 @@ public class BookActivity extends AppCompatActivity {
     //RatingBar ratingBar;
     ImageView ivCover;
     Button btnBookTitle;
+    String book_id;
 
 
     @Override
@@ -44,17 +45,16 @@ public class BookActivity extends AppCompatActivity {
         ivCover = findViewById(R.id.ivCover);
         btnBookTitle = findViewById(R.id.btnBookTitle);
 
-        //tvRating.setText(" " + book.getRating());
-        //tvBookDescription.setText(book.getDescription());
-        //ratingBar.setRating((float)book.getRating());
-        String book_id = getIntent().getStringExtra("Book_ID");
-
+        book_id = getIntent().getStringExtra("Book_ID");
+        Log.d(TAG,URL + book_id);
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(URL + book_id, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
                 try {
+
                     JSONObject volumeInfo = json.jsonObject.getJSONObject("volumeInfo");
+                    Log.d(TAG,"Volume info: "+ volumeInfo.toString());
                     btnBookTitle.setText(volumeInfo.getString("title"));
                     tvBookDescription.setText(volumeInfo.getString("description"));
                     Glide.with(BookActivity.this).load(volumeInfo.getJSONObject("imageLinks").getString("large"))

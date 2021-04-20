@@ -25,7 +25,7 @@ public class Post extends ParseObject  {
     }
 
     public String getKeyBookId(){
-        return getString(KEY_BOOK_TITLE);
+        return getString(KEY_BOOK_ID);
     }
     public void setBookId(String bookId)
     {
