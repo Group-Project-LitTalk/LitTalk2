@@ -17,8 +17,6 @@ public class Book {
     String author;
     String BookId;
 
-
-
     public Book() {
     }
 
@@ -28,7 +26,7 @@ public class Book {
         coverPath = volumeInfo.getJSONObject("imageLinks").getString("thumbnail");
         title = volumeInfo.getString("title");
         BookId = jsonObject.getString("id");
-        //description = volumeInfo.getString("description");
+        description = volumeInfo.getString("description");
         //author = volumeInfo.getJSONArray("author").getString(0);
     }
 
@@ -57,5 +55,4 @@ public class Book {
     public String getBookId() {
         return BookId;
     }
-
 }

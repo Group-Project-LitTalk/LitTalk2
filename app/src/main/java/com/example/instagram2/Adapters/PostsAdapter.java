@@ -102,27 +102,29 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ParseQuery <ParseObject> posts = ParseQuery.getQuery("Post");
             // Query parameters based on the item name
             posts.whereEqualTo("objectId", objectId);
-
-            posts.findInBackground(new FindCallback<ParseObject>() {
-                @Override
-                public void done(final List <ParseObject> player, ParseException e) {
-                    if (e == null) {
-                        player.get(0).deleteInBackground(new DeleteCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    // Success
-                                } else {
-                                    // Failed
+            if(objectId != null) {
+                posts.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(final List<ParseObject> player, ParseException e) {
+                        if (e == null) {
+                            player.get(0).deleteInBackground(new DeleteCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if (e == null) {
+                                        // Success
+                                    } else {
+                                        // Failed
+                                    }
                                 }
-                            }
-                        });
-                    } else {
-                        // Something is wrong
+                            });
+                        } else {
+                            // Something is wrong
+                        }
                     }
-                };
-            });
-            
+
+                    ;
+                });
+            }
         }
 
         public void replyPost(String objectId)
