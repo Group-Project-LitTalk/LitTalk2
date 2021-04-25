@@ -55,6 +55,8 @@ public class ComposeFragment extends Fragment {
 
     private File photoFile;
     public String photoFileName = "photo.jpg";
+    String bookID;
+    String bookTitle;
 
     public ComposeFragment() {
         // Required empty public constructor
@@ -77,8 +79,9 @@ public class ComposeFragment extends Fragment {
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
 
-        String bookID = getActivity().getIntent().getStringExtra("ID");
-        String bookTitle = getActivity().getIntent().getStringExtra("Title");
+        bookID = getActivity().getIntent().getStringExtra("ID");
+        bookTitle = getActivity().getIntent().getStringExtra("Title");
+
         if(bookTitle != null){
             tvTitle.setText(bookTitle);
         } else {tvTitle.setText("Nothing selected");}
@@ -120,7 +123,7 @@ public class ComposeFragment extends Fragment {
 
                 if(photoFile == null || ivPostImage.getDrawable() == null)
                 {
-                //    Toast.makeText(getContext(), "There is no image", Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(getContext(), "There is no image", Toast.LENGTH_SHORT).show();
 
                     ParseUser currentUser = ParseUser.getCurrentUser();
                     savePostNoPicture(description, currentUser);
@@ -148,6 +151,10 @@ public class ComposeFragment extends Fragment {
 
         post.setDescription(description);
         post.setUser(currentUser);
+        if(bookID != null) {
+            post.setBookId(bookID);
+            post.setBookTitle(bookTitle);
+        } else { Log.d(TAG,"SOMETHING WRONG!!!");}
 
         post.saveInBackground(new SaveCallback() {
             @Override

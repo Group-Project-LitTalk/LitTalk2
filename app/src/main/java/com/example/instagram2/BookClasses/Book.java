@@ -13,11 +13,7 @@ public class Book {
 
     String coverPath;
     String title;
-    String description;
-    String author;
     String BookId;
-
-
 
     public Book() {
     }
@@ -28,8 +24,6 @@ public class Book {
         coverPath = volumeInfo.getJSONObject("imageLinks").getString("thumbnail");
         title = volumeInfo.getString("title");
         BookId = jsonObject.getString("id");
-        //description = volumeInfo.getString("description");
-        //author = volumeInfo.getJSONArray("author").getString(0);
     }
 
     public static List<Book> fromJsonArray(JSONArray bookJsonArray) throws JSONException {
@@ -48,12 +42,7 @@ public class Book {
     public String getTitle() {
         return title;
     }
-    public String getDescription() {
-        return description;
-    }
-    public String getAuthor() {
-        return author;
-    }
+
     public String getBookId() {
         return BookId;
     }

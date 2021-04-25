@@ -87,4 +87,3 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 }
-

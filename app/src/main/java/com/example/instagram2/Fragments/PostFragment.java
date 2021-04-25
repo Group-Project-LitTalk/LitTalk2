@@ -16,8 +16,10 @@ import android.view.ViewGroup;
 import com.example.instagram2.Post;
 import com.example.instagram2.Adapters.PostsAdapter;
 import com.example.instagram2.R;
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class PostFragment extends Fragment {
     public static final String TAG = "PostFragment";
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
-    protected List<Post> allPosts;
+    protected List <Post> allPosts;
 
     public PostFragment() {
         // Required empty public constructor
@@ -85,6 +87,7 @@ public class PostFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
+
 
 
     }

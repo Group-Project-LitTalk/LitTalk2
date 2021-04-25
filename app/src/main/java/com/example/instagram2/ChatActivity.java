@@ -112,39 +112,6 @@ public class ChatActivity extends AppCompatActivity {
 
         tvPost = (TextView) findViewById(R.id.tvPost);
 
-        //
-
-         /*
-
-                     ParseQuery<ParseObject> soccerPlayers = ParseQuery.getQuery("SoccerPlayers");
-            // Query parameters based on the item name
-            soccerPlayers.whereEqualTo("objectId", "QHjRWwgEtd");
-            soccerPlayers.findInBackground(new FindCallback<ParseObject>() {
-              @Override
-              public void done(final List<ParseObject> player, ParseException e) {
-                if (e == null) {
-                  player.get(0).deleteInBackground(new DeleteCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                      if (e == null) {
-                        // Success
-                      } else {
-                        // Failed
-                      }
-                    }
-                  });
-                } else {
-                  // Something is wrong
-                }
-              };
-            }
-
-          */
-
-
-
-        //
-
         mMessages = new ArrayList<>();
         mFirstLoad = true;
         final String userId = ParseUser.getCurrentUser().getObjectId();
