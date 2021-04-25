@@ -44,6 +44,7 @@ public class ComposeFragment extends Fragment {
 
     public static final String TAG = "ComposeFragment";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+    public static final int BOOK_ACTIVITY_REQUEST_CODE = 21;
 
     private EditText etDescription;
     private Button btnSearch;
@@ -140,7 +141,9 @@ public class ComposeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
+                if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                    startActivityForResult(intent, BOOK_ACTIVITY_REQUEST_CODE);
+                }
             }
         });
 

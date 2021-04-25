@@ -4,34 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_marginBottom="5dp"
+    android:background="#FFFFFF"
+    android:forceDarkAllowed="false">
 
     <TextView
         android:id="@+id/tvBookTitle"
-        android:layout_width="0dp"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
         android:maxLength="100"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="24sp"
+        app:autoSizeMaxTextSize="20sp"
+        app:autoSizeMinTextSize="14sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
         app:layout_constraintStart_toEndOf="@+id/ivThumbnail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <ImageView
         android:id="@+id/ivThumbnail"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
         app:srcCompat="@drawable/ic_book" />
 
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_margin="7dp"
+        android:layout_margin="3dp"
         android:background="@android:drawable/ic_input_add"
         android:backgroundTint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBookTitle" />
+        app:layout_constraintTop_toTopOf="@+id/tvBookTitle" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="411dp"
+        android:layout_height="5dp"
+        android:background="#A5DAF5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_untitled" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
