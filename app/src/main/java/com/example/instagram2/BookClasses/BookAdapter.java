@@ -14,9 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.instagram2.ChatActivity;
-import com.example.instagram2.Fragments.ComposeFragment;
-import com.example.instagram2.MainActivity;
+import com.example.instagram2.Main.MainActivity;
 import com.example.instagram2.R;
 
 import java.util.ArrayList;

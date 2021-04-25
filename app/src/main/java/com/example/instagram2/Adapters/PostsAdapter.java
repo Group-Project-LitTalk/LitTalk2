@@ -21,7 +21,6 @@ import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;

@@ -1,4 +1,4 @@
-package com.example.instagram2;
+package com.example.instagram2.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentManager;
 import com.example.instagram2.Fragments.ComposeFragment;
 import com.example.instagram2.Fragments.PostFragment;
 import com.example.instagram2.Fragments.ProfileFragment;
+import com.example.instagram2.LoginActivity;
+import com.example.instagram2.R;
 import com.example.instagram2.Search.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
