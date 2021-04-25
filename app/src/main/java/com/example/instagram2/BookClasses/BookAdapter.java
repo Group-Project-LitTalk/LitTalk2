@@ -1,6 +1,5 @@
 package com.example.instagram2.BookClasses;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -22,8 +21,6 @@ import com.example.instagram2.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.app.Activity.RESULT_OK;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
@@ -80,8 +77,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
                     i.putExtra("ID",book.BookId);
                     i.putExtra("Title",book.getTitle());
                     context.startActivity(i);
-                    ((Activity)context).setResult(Activity.RESULT_OK, i);
-                    ((Activity)context).finish();
                 }
             });
         }
@@ -92,4 +87,3 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 }
-

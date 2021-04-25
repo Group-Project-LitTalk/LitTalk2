@@ -122,7 +122,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     }
                 };
             });
-            
+
         }
 
         public void replyPost(String objectId)
