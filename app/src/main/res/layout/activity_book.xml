@@ -34,6 +34,15 @@
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tvRatingAlert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Available Reviews"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#330606" />
+
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
