@@ -16,11 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.instagram2.BookClasses.BookActivity;
 import com.example.instagram2.ChatActivity;
-import com.example.instagram2.MainActivity;
 import com.example.instagram2.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -28,7 +26,6 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,7 +37,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     private Context context;
     private List<Post> posts;
     public static final String TAG = "PostsAdapter";
-    protected PostsAdapter adapter;
 
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
