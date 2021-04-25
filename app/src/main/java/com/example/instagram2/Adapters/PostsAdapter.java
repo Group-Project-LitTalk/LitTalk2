@@ -125,25 +125,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         }
 
-        public void replyPost(String objectId)
-        {
-            ParseQuery<ParseObject> post = ParseQuery.getQuery("Post");
-            // Retrieve the object by id
-            post.getInBackground(objectId, new GetCallback<ParseObject>() {
-                public void done(ParseObject player, ParseException e) {
-                    if (e == null) {
-                        // Now let's update it with some new data. In this case, only cheatMode and score
-                        // will get sent to the Parse Cloud. playerName hasn't changed.
-                        player.put("yearOfBirth", 1998);
-                        player.put("emailContact", "a.wed@domain.io");
-                        player.saveInBackground();
-                    } else {
-                        // Failed
-                    }
-                }
-            });
-        }
-
         public void bind(Post post) {
 
             tvDescription.setText(post.getDescription());

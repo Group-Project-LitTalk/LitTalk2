@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.instagram2.Fragments.ComposeFragment;
 import com.example.instagram2.Fragments.PostFragment;
 import com.example.instagram2.Fragments.ProfileFragment;
+import com.example.instagram2.Search.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.DeleteCallback;
@@ -59,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
+                if(menuItem.getItemId() == R.id.action_search)
+                {
+                    goToActivity(SearchActivity.class);
+                    return true;
+                }
+
                 Fragment fragment;
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
@@ -77,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
-
 
     }
     // Function to go to a chosen activity

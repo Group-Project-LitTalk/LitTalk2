@@ -60,8 +60,6 @@ public class ChatActivity extends AppCompatActivity {
     Message editMessage;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
