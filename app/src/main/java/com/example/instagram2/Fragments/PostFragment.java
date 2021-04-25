@@ -92,32 +92,4 @@ public class PostFragment extends Fragment {
 
     }
 
-    public void helpDelete(String objectId)
-    {
-        ParseQuery <ParseObject> posts = ParseQuery.getQuery("PostFragment");
-        // Query parameters based on the item name
-        posts.whereEqualTo("objectId", objectId);
-
-        posts.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(final List <ParseObject> player, ParseException e) {
-                if (e == null) {
-                    player.get(0).deleteInBackground(new DeleteCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e == null) {
-                                // Success
-                            } else {
-                                // Failed
-                            }
-                        }
-                    });
-                } else {
-                    // Something is wrong
-                }
-            };
-        });
-
-    }
-
 }

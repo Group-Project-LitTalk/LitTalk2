@@ -35,20 +35,21 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvRatingAlert"
-                android:layout_width="match_parent"
+                android:id="@+id/tvReviewAlert"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No Available Reviews"
-                android:textAlignment="center"
+                android:text="No available reviews"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#330606" />
+                android:textStyle="bold"
+                android:visibility="visible" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:rating="1" />
+                android:rating="1"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvBookDescription"

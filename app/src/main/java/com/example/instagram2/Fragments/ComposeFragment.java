@@ -1,6 +1,5 @@
 package com.example.instagram2.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,7 +26,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.instagram2.BookClasses.BookActivity;
 import com.example.instagram2.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.Search.SearchActivity;
@@ -44,6 +42,7 @@ public class ComposeFragment extends Fragment {
 
     public static final String TAG = "ComposeFragment";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+    public static final int BOOK_ACTIVITY_REQUST_CODE = 21;
 
     private EditText etDescription;
     private Button btnSearch;
@@ -78,9 +77,6 @@ public class ComposeFragment extends Fragment {
         ibtnCapture = view.findViewById(R.id.ibtnCapture);
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
-
-        bookID = getActivity().getIntent().getStringExtra("ID");
-        bookTitle = getActivity().getIntent().getStringExtra("Title");
 
         if(bookTitle != null){
             tvTitle.setText(bookTitle);
@@ -140,10 +136,12 @@ public class ComposeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
+                if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                    // Start the image capture intent to take photo
+                    startActivityForResult(intent,BOOK_ACTIVITY_REQUST_CODE);
+                }
             }
         });
-
     }
 
     private void savePostNoPicture(String description, ParseUser currentUser) {
@@ -227,6 +225,14 @@ public class ComposeFragment extends Fragment {
                 ivPostImage.setImageBitmap(takenImage);
             } else { // Result was a failure
                 Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (requestCode == BOOK_ACTIVITY_REQUST_CODE) {
+            if (resultCode == RESULT_OK) {
+                bookID = getActivity().getIntent().getStringExtra("ID");
+                bookTitle = getActivity().getIntent().getStringExtra("Title");
+            } else { // Result was a failure
+                Toast.makeText(getContext(), "Book wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
     }
