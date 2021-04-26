@@ -39,7 +39,7 @@
             android:layout_centerVertical="true"
             android:hint="Add a comment..."
             android:textSize="14sp"
-            android:id="@+id/comment" />
+            android:id="@+id/etComment" />
 
     <ImageView
         android:layout_width="40dp"

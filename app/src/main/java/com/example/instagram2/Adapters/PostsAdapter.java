@@ -84,9 +84,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(context, ChatActivity.class);
-                    context.startActivity(i);
-                    //tvPost.setText((CharSequence) tvDescription);
+               /*     Intent i = new Intent(context, ChatActivity.class);
+                    context.startActivity(i); */
+
+                    ParseQuery <ParseObject> replyPosts = ParseQuery.getQuery("Post");
                 }
             });
 

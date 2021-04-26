@@ -1,62 +1,37 @@
 package com.example.instagram2.Models;
 
-public class Comment {
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
-    private String content;
-    private String uid;
-    private String uimg;
-    private String uname;
+@ParseClassName("Comment")
+public class Comment extends ParseObject {
+
+    public static final String KEY_COMMENT = "comment";
+    public static final String KEY_USER = "user";
+    public static final String KEY_CREATED_KEY = "createdAt";
 
     private Object timestamp;
 
-    public Comment() {
+    public static String getKeyComment() {
+        return KEY_COMMENT;
     }
 
-    public Comment(String content, String uid, String uimg, String uname) {
-        this.content = content;
-        this.uid = uid;
-        this.uimg = uimg;
-        this.uname = uname;
-
+    public void setKeyComment(String description)
+    {
+        put(KEY_COMMENT, description);
     }
 
-    public String getContent() {
-        return content;
+    public static String getKeyUser() {
+        return KEY_USER;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setUser(ParseUser user)
+    {
+        put(KEY_USER, user);
     }
 
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getUimg() {
-        return uimg;
-    }
-
-    public void setUimg(String uimg) {
-        this.uimg = uimg;
-    }
-
-    public String getUname() {
-        return uname;
-    }
-
-    public void setUname(String uname) {
-        this.uname = uname;
-    }
-
-    public Object getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Object timestamp) {
-        this.timestamp = timestamp;
+    public static String getKeyCreatedKey() {
+        return KEY_CREATED_KEY;
     }
 }
