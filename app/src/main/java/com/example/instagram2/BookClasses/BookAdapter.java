@@ -68,6 +68,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         public void bind(Book book) {
             tvTitle.setText(book.getTitle());
             Glide.with(context).load(book.getCoverPath()).into(ivImage);
+
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

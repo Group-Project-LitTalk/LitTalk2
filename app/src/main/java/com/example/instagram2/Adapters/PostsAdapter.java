@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.instagram2.BookClasses.BookActivity;
 import com.example.instagram2.ChatActivity;
+import com.example.instagram2.CommentClasses.Comment;
+import com.example.instagram2.CommentClasses.CommentActivity;
 import com.example.instagram2.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
@@ -81,16 +83,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvReply = itemView.findViewById(R.id.tvReply);
             btnDelete = itemView.findViewById(R.id.btnDelete);
 
-            tvReply.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-               /*     Intent i = new Intent(context, ChatActivity.class);
-                    context.startActivity(i); */
-
-                    ParseQuery <ParseObject> replyPosts = ParseQuery.getQuery("Post");
-                }
-            });
-
         }
 
         public void helpDelete(String objectId)
@@ -103,6 +95,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 @Override
                 public void done(final List <ParseObject> player, ParseException e) {
                     if (e == null) {
+
                         player.get(0).deleteInBackground(new DeleteCallback() {
                             @Override
                             public void done(ParseException e) {
@@ -137,6 +130,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     helpDelete(post.getObjectId());
 
                     notifyDataSetChanged();
+                }
+            });
+
+            tvReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(context, ChatActivity.class);
+                    i.putExtra("user", post.getObjectId());
+                    i.putExtra("username", post.getUser().getUsername());
+
+                    if (image != null)
+                    {
+                        i.putExtra("imageP", post.getImage().getUrl());
+                    }
+
+                    context.startActivity(i);
                 }
             });
 

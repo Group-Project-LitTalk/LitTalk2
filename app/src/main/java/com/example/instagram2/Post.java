@@ -5,6 +5,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.Map;
+
 @ParseClassName("Post")
 public class Post extends ParseObject  {
     public static final String KEY_DESCRIPTION = "description";
@@ -13,6 +15,7 @@ public class Post extends ParseObject  {
     public static final String KEY_CREATED_KEY = "createdAt";
     public static final String KEY_BOOK_ID = "BookID";
     public static final String KEY_BOOK_TITLE = "BookTitle";
+
 
     public String getDescription()
     {
@@ -60,4 +63,10 @@ public class Post extends ParseObject  {
         put(KEY_USER, user);
     }
 
+    public String getUsername(){return getString(KEY_USER);}
+
+    @Override
+    public String toString() {
+        return " " + KEY_USER;
+    }
 }

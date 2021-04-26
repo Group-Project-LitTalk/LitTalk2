@@ -4,18 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.instagram2.Adapters.ChatAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.LogInCallback;
@@ -27,9 +29,6 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.livequery.ParseLiveQueryClient;
 import com.parse.livequery.SubscriptionHandling;
-
-import org.parceler.Parcels;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +47,15 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView rvChat;
     ArrayList<Message> mMessages;
     ChatAdapter mAdapter;
-    TextView tvPost;
+    String postId;
 
     boolean mFirstLoad;
 
     EditText etMessage;
     ImageButton btSend;
+    TextView tvPost;
+    TextView tvUsername;
+    private ImageView ivImage;
 
     int contextMenuIndexClicked = -1;
     boolean isEditMode = false;
@@ -65,6 +67,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         // User login
+        postId = getIntent().getStringExtra("user");
+
         if (ParseUser.getCurrentUser() != null) { // start with existing user
             startWithCurrentUser();
         } else { // If not logged in, login as a new anonymous user
@@ -99,6 +103,11 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     void startWithCurrentUser() {
+
+        tvPost = (TextView) findViewById(R.id.tvPost);
+        tvUsername = (TextView) findViewById(R.id.tvUsername);
+        ivImage = (ImageView) findViewById(R.id.ivImage);
+        gettingPostInfo(postId, tvPost, tvUsername, ivImage);
         setupMessagePosting();
     }
 
@@ -108,11 +117,10 @@ public class ChatActivity extends AppCompatActivity {
         btSend = (ImageButton) findViewById(R.id.btSend);
         rvChat = (RecyclerView) findViewById(R.id.rvChat);
 
-        tvPost = (TextView) findViewById(R.id.tvPost);
-
         mMessages = new ArrayList<>();
         mFirstLoad = true;
         final String userId = ParseUser.getCurrentUser().getObjectId();
+
         mAdapter = new ChatAdapter(ChatActivity.this, userId, mMessages);
         rvChat.setAdapter(mAdapter);
 
@@ -145,6 +153,38 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void gettingPostInfo(String objectId, TextView tvPost, TextView tvUsername, ImageView ivImage)
+    {
+     /*   Glide.with(context).load(post.getImage().getUrl())
+                    .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage); */
+
+        tvUsername.setText(getIntent().getStringExtra("username"));
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
+
+        query.getInBackground(postId, new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    // object will be your game score
+                    ParseUser user = object.getParseUser(postId);
+
+                    Log.d("ChatActivity", object.getString("description"));
+                    Log.d("ChatActivity", tvUsername.toString());
+
+                    tvPost.setText(object.getString("description"));
+                    //tvUsername.setText(object.getString("user"));
+                    //tvUsername.setText(object.getString("user").toString());
+
+
+                    //    tvUsername.setText(object.getString("user"));
+                } else {
+                    // something went wrong
+                }
+            }
+        });
+
+    }
+
 
     void login() {
         ParseAnonymousUtils.logIn(new LogInCallback() {
@@ -211,5 +251,6 @@ public class ChatActivity extends AppCompatActivity {
         myHandler.removeCallbacksAndMessages(null);
         super.onPause();
     }
+
 
 }

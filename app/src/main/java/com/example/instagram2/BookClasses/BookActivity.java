@@ -48,7 +48,9 @@ public class BookActivity extends AppCompatActivity {
         btnBookTitle = findViewById(R.id.btnBookTitle);
 
         book_id = getIntent().getStringExtra("Book_ID");
+
         Log.d(TAG,URL + book_id);
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(URL + book_id, new JsonHttpResponseHandler() {
             @Override

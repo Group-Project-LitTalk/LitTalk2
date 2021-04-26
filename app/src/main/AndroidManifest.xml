@@ -25,6 +25,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Search.SearchActivity"></activity>
         <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".CommentClasses.CommentActivity"></activity>
         <activity android:name=".BookClasses.BookActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">

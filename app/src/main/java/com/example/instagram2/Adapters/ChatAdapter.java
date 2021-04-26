@@ -21,7 +21,13 @@ import com.example.instagram2.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.math.BigInteger;
@@ -39,11 +45,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     private List<Message> mMessages;
     private Context mContext;
     private String mUserId;
+    private String postId;
 
     public ChatAdapter(Context context, String userId, List<Message> messages) {
         mMessages = messages;
         this.mUserId = userId;
         mContext = context;
+
     }
 
     public abstract class MessageViewHolder extends RecyclerView.ViewHolder {
@@ -69,6 +77,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             body = (TextView)itemView.findViewById(R.id.tvBody);
             name = (TextView)itemView.findViewById(R.id.tvName);
             tvPost = (TextView) itemView.findViewById(R.id.tvPost);
+
         }
 
         @Override
@@ -80,17 +89,20 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             body.setText(message.getBody());
             name.setText(message.getUserId()); // in addition to message show user ID
           //  tvPost.setText(PostsAdapter.tvDescription);
+            gettingPostInfo(postId, tvPost);
         }
     }
 
     public class OutgoingMessageViewHolder extends MessageViewHolder {
         ImageView imageMe;
         TextView body;
+        TextView tvPost;
 
         public OutgoingMessageViewHolder(View itemView) {
             super(itemView);
             imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
             body = (TextView)itemView.findViewById(R.id.tvBody);
+            tvPost = (TextView) itemView.findViewById(R.id.tvPost);
         }
 
         @Override
@@ -100,6 +112,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                     .circleCrop() // create an effect of a round profile picture
                     .into(imageMe);
             body.setText(message.getBody());
+            gettingPostInfo(postId, tvPost);
         }
 
 
@@ -160,6 +173,23 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         Message message = mMessages.get(position);
         return message.getUserId() != null && message.getUserId().equals(mUserId);
     }
+
+    public void gettingPostInfo(String objectId, TextView tvPost)
+    {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
+        query.getInBackground(postId, new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    // object will be your game score
+                    tvPost.setText(object.getString("description"));
+                } else {
+                    // something went wrong
+                }
+            }
+        });
+
+    }
+
 }
 
 
