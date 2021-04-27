@@ -30,7 +30,10 @@ import com.parse.SaveCallback;
 import com.parse.livequery.ParseLiveQueryClient;
 import com.parse.livequery.SubscriptionHandling;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -55,7 +58,9 @@ public class ChatActivity extends AppCompatActivity {
     ImageButton btSend;
     TextView tvPost;
     TextView tvUsername;
-    private ImageView ivImage;
+    ImageView ivImage;
+    TextView tvTime;
+    ImageView imageView2;
 
     int contextMenuIndexClicked = -1;
     boolean isEditMode = false;
@@ -107,7 +112,10 @@ public class ChatActivity extends AppCompatActivity {
         tvPost = (TextView) findViewById(R.id.tvPost);
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         ivImage = (ImageView) findViewById(R.id.ivImage);
-        gettingPostInfo(postId, tvPost, tvUsername, ivImage);
+        tvTime = (TextView) findViewById(R.id.tvTime);
+        imageView2 = (ImageView) findViewById(R.id.imageView2);
+
+        gettingPostInfo(postId, tvPost, tvUsername, tvTime);
         setupMessagePosting();
     }
 
@@ -154,10 +162,8 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    public void gettingPostInfo(String objectId, TextView tvPost, TextView tvUsername, ImageView ivImage)
+    public void gettingPostInfo(String objectId, TextView tvPost, TextView tvUsername, TextView tvTime)
     {
-     /*   Glide.with(context).load(post.getImage().getUrl())
-                    .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage); */
 
         tvUsername.setText(getIntent().getStringExtra("username"));
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
@@ -172,11 +178,8 @@ public class ChatActivity extends AppCompatActivity {
                     Log.d("ChatActivity", tvUsername.toString());
 
                     tvPost.setText(object.getString("description"));
-                    //tvUsername.setText(object.getString("user"));
-                    //tvUsername.setText(object.getString("user").toString());
+                    tvTime.setText(getDate(object));
 
-
-                    //    tvUsername.setText(object.getString("user"));
                 } else {
                     // something went wrong
                 }
@@ -225,6 +228,13 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private String getDate(ParseObject parseObject) {
+        Date date = parseObject.getCreatedAt();
+        DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
+        String time = TimeFormatter.getTimeDifference(df.format(date));
+        return time;
     }
 
     static final long POLL_INTERVAL = TimeUnit.SECONDS.toMillis(3);

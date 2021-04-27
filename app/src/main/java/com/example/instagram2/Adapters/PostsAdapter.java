@@ -141,9 +141,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     i.putExtra("user", post.getObjectId());
                     i.putExtra("username", post.getUser().getUsername());
 
-                    if (image != null)
+                    if (post.getImage() != null)
                     {
-                        i.putExtra("imageP", post.getImage().getUrl());
+                        Intent j = new Intent(context, ChatAdapter.class);
+                        j.putExtra("imageP", post.getImage().getUrl());
                     }
 
                     context.startActivity(i);

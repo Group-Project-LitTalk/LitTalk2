@@ -36,6 +36,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
 
@@ -46,6 +47,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     private Context mContext;
     private String mUserId;
     private String postId;
+
+
+    TextView tvPost;
+    ImageView ivImage;
+
+
 
     public ChatAdapter(Context context, String userId, List<Message> messages) {
         mMessages = messages;
@@ -69,14 +76,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         ImageView imageOther;
         TextView body;
         TextView name;
-        TextView tvPost;
-        
+
         public IncomingMessageViewHolder(View itemView) {
             super(itemView);
             imageOther = (ImageView)itemView.findViewById(R.id.ivProfileOther);
             body = (TextView)itemView.findViewById(R.id.tvBody);
             name = (TextView)itemView.findViewById(R.id.tvName);
-            tvPost = (TextView) itemView.findViewById(R.id.tvPost);
 
         }
 
@@ -86,33 +91,33 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                     .load(getProfileUrl(message.getUserId()))
                     .circleCrop() // create an effect of a round profile picture
                     .into(imageOther);
+
             body.setText(message.getBody());
             name.setText(message.getUserId()); // in addition to message show user ID
           //  tvPost.setText(PostsAdapter.tvDescription);
-            gettingPostInfo(postId, tvPost);
+            gettingPostInfo(postId, tvPost, ivImage);
         }
     }
 
     public class OutgoingMessageViewHolder extends MessageViewHolder {
         ImageView imageMe;
         TextView body;
-        TextView tvPost;
 
         public OutgoingMessageViewHolder(View itemView) {
             super(itemView);
             imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
             body = (TextView)itemView.findViewById(R.id.tvBody);
-            tvPost = (TextView) itemView.findViewById(R.id.tvPost);
         }
 
         @Override
         public void bindMessage(Message message) {
+
             Glide.with(mContext)
                     .load(getProfileUrl(message.getUserId()))
                     .circleCrop() // create an effect of a round profile picture
                     .into(imageMe);
             body.setText(message.getBody());
-            gettingPostInfo(postId, tvPost);
+            gettingPostInfo(postId, tvPost, ivImage);
         }
 
 
@@ -135,6 +140,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
+
 
         if (viewType == MESSAGE_INCOMING) {
             View contactView = inflater.inflate(R.layout.message_incoming, parent, false);
@@ -174,14 +180,20 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         return message.getUserId() != null && message.getUserId().equals(mUserId);
     }
 
-    public void gettingPostInfo(String objectId, TextView tvPost)
+    public void gettingPostInfo(String objectId, TextView tvPost, ImageView ivImage)
     {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
+
         query.getInBackground(postId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     // object will be your game score
+                    Glide.with(mContext).load(object.getParseFile("image").getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
+
+                            //    .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
+
                     tvPost.setText(object.getString("description"));
+
                 } else {
                     // something went wrong
                 }
