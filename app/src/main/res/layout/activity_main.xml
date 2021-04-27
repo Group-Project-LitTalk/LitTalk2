@@ -13,21 +13,7 @@
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation" >
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabDeleteReply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="10dp"
-            android:backgroundTint="@color/purple_200"
-            android:clickable="true"
-            android:rotation="0"
-            android:rotationX="0"
-            android:rotationY="0"
-            app:srcCompat="@drawable/abc_vector_test" />
-    </FrameLayout>
+        android:layout_above="@+id/bottom_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

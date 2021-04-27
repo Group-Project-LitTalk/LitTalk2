@@ -1,5 +1,6 @@
 package com.example.instagram2.BookClasses;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagram2.Fragments.ComposeFragment;
 import com.example.instagram2.Main.MainActivity;
 import com.example.instagram2.R;
 
@@ -76,6 +78,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
                     i.putExtra("ID",book.BookId);
                     i.putExtra("Title",book.getTitle());
                     context.startActivity(i);
+                    ((Activity) context).finish();
                 }
             });
         }

@@ -16,10 +16,8 @@ import android.view.ViewGroup;
 import com.example.instagram2.Post;
 import com.example.instagram2.Adapters.PostsAdapter;
 import com.example.instagram2.R;
-import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -31,7 +29,7 @@ public class PostFragment extends Fragment {
     public static final String TAG = "PostFragment";
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
-    protected List <Post> allPosts;
+    protected List<Post> allPosts;
 
     public PostFragment() {
         // Required empty public constructor
@@ -48,7 +46,7 @@ public class PostFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvPosts = view.findViewById(R.id.rvPosts);
+        rvPosts = view.findViewById(R.id.rvProfilePosts);
 
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), allPosts);
@@ -72,14 +70,12 @@ public class PostFragment extends Fragment {
             @Override
             public void done(List<Post> posts, ParseException e) {
 
-                if(e != null)
-                {
+                if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
 
-                for(Post post : posts)
-                {
+                for (Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername() + " ,Time: " + post.getCreatedAt());
                 }
 
@@ -87,9 +83,5 @@ public class PostFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
-
-
     }
-
 }
