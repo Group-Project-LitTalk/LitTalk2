@@ -39,7 +39,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class ChatActivity extends AppCompatActivity {
@@ -49,10 +51,6 @@ public class ChatActivity extends AppCompatActivity {
     Activity activity = this;
 
     static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
-
-    static final String USER_ID_KEY = "userId";
-    static final String BODY_KEY = "body";
-
 
     RecyclerView rvChat;
     ArrayList<Message> mMessages;
@@ -72,7 +70,6 @@ public class ChatActivity extends AppCompatActivity {
     int contextMenuIndexClicked = -1;
     boolean isEditMode = false;
     Message editMessage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +130,7 @@ public class ChatActivity extends AppCompatActivity {
         rvChat = (RecyclerView) findViewById(R.id.rvChat);
 
         mMessages = new ArrayList<>();
+
         mFirstLoad = true;
         final String userId = ParseUser.getCurrentUser().getObjectId();
 
@@ -155,7 +153,13 @@ public class ChatActivity extends AppCompatActivity {
                 // Using new `Message` Parse-backed model now
                 Message message = new Message();
                 message.setBody(data);
-                message.setUserId(ParseUser.getCurrentUser().getObjectId());
+
+                //tvUsername.setText(post.getUser().getUsername());
+
+                message.setPostId(postId);
+
+                //message.setUserId(ParseUser.getCurrentUser().getObjectId());
+
                 message.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
@@ -165,6 +169,26 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 });
                 etMessage.setText(null);
+            }
+        });
+
+    }
+
+    public void attemptPostInfo(Message message)
+    {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
+
+        query.getInBackground(postId, new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    // object will be your game score
+                    ParseUser user = object.getParseUser(postId);
+                    message.setPostId(object.getObjectId());
+
+                } else {
+                    Log.d(TAG, "Something is wrong");
+                    // something went wrong
+                }
             }
         });
     }
@@ -182,6 +206,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         tvUsername.setText(getIntent().getStringExtra("username"));
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
 
         query.getInBackground(postId, new GetCallback<ParseObject>() {
@@ -243,7 +268,12 @@ public class ChatActivity extends AppCompatActivity {
             public void done(List<Message> messages, ParseException e) {
                 if (e == null) {
                     mMessages.clear();
+
+                    for(Message message: messages)
+                        Log.d(TAG, "Message stuff: " + message.getPostId());
+
                     mMessages.addAll(messages);
+//                    holdKey.get(postId).addAll(messages);
                     mAdapter.notifyDataSetChanged(); // update adapter
                     // Scroll to the bottom of the list on initial load
                     if (mFirstLoad) {

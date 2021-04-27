@@ -45,6 +45,7 @@
             android:layout_toLeftOf="@+id/btSend"
             android:gravity="top"
             android:textColorHint="@color/white"
+            android:textColor="@color/white"
             android:hint="Reply Post"
             android:imeOptions="actionSend"
             android:inputType="textShortMessage" />

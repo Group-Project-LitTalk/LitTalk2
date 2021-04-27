@@ -51,7 +51,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     private List<Message> mMessages;
     private Context mContext;
     private String mUserId;
-    private String postId;
 
 
     ImageView ivPostPic;
