@@ -2,6 +2,7 @@ package com.example.instagram2.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -143,8 +144,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
                     if (post.getImage() != null)
                     {
-                        Intent j = new Intent(context, ChatAdapter.class);
-                        j.putExtra("imageP", post.getImage().getUrl());
+                        i.putExtra("imageP", post.getImage().getUrl());
                     }
 
                     context.startActivity(i);
@@ -164,6 +164,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context).load(post.getImage().getUrl())
                         .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
 
+
         }
 
         private String getDate(Post post) {
@@ -172,6 +173,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             String time = TimeFormatter.getTimeDifference(df.format(date));
             return time;
         }
+
+
     }
 }
 

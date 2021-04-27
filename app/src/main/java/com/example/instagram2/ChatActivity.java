@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -43,6 +46,8 @@ public class ChatActivity extends AppCompatActivity {
 
     static final String TAG = ChatActivity.class.getSimpleName();
 
+    Activity activity = this;
+
     static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
 
     static final String USER_ID_KEY = "userId";
@@ -62,6 +67,7 @@ public class ChatActivity extends AppCompatActivity {
     TextView tvUsername;
     TextView tvTime;
     ImageView backArrow;
+    ImageView ivPostPic;
 
     int contextMenuIndexClicked = -1;
     boolean isEditMode = false;
@@ -114,8 +120,9 @@ public class ChatActivity extends AppCompatActivity {
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         tvTime = (TextView) findViewById(R.id.tvTime);
         backArrow = (ImageView) findViewById(R.id.backArrow);
+        ivPostPic = (ImageView) findViewById(R.id.ivPostPic);
 
-        gettingPostInfo(postId, tvPost, tvUsername, tvTime);
+        gettingPostInfo(postId, tvPost, tvUsername, tvTime, ivPostPic);
         setupMessagePosting();
     }
 
@@ -162,7 +169,7 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    public void gettingPostInfo(String objectId, TextView tvPost, TextView tvUsername, TextView tvTime)
+    public void gettingPostInfo(String objectId, TextView tvPost, TextView tvUsername, TextView tvTime, ImageView ivPostPic)
     {
 
         backArrow.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +198,13 @@ public class ChatActivity extends AppCompatActivity {
 
                     Log.d(TAG, "Post Date: " + getDate(object));
                     tvTime.setText(getDate(object));
+
+                    if(getIntent().getStringExtra("imageP") != null)
+                    {
+                        Glide.with(activity).load(getIntent().getStringExtra("imageP"))
+                                .override(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT).fitCenter().into(ivPostPic);
+                    }
+
 
                 } else {
                     Log.d(TAG, "Something is wrong");

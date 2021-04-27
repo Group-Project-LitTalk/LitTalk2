@@ -11,7 +11,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"
         android:layout_width="match_parent"
-        android:layout_height="383dp"
+        android:layout_height="362dp"
         android:layout_above="@+id/rlSend"
         android:layout_below="@+id/rlPost"
         android:layout_alignParentStart="true"
@@ -20,6 +20,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
 
+        android:layout_marginTop="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="-5dp"
         android:background="@color/grey"
@@ -64,7 +65,7 @@
     <RelativeLayout
         android:id="@+id/rlPost"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="277dp">
 
         <ImageView
             android:id="@+id/backArrow"
@@ -100,9 +101,10 @@
 
         <RelativeLayout
             android:id="@+id/postBlock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="335dp"
+            android:layout_height="241dp"
             android:layout_below="@id/tvNext"
+            android:layout_marginLeft="1dp"
             android:layout_toRightOf="@+id/ivProfileOther">
 
             <TextView
@@ -137,37 +139,33 @@
                 android:textStyle="bold"
                 tools:text='"POST GOES HERE"' />
 
-            <!--
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvPost"
-            android:layout_marginStart="89dp"
-            android:layout_marginLeft="53dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="212dp"
-            android:paddingRight="20dp"
-            android:text="Timestamp"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent" /> -->
 
             <TextView
                 android:id="@+id/tvTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvPost"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="17dp"
-                android:layout_marginTop="3dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="8dp"
                 android:paddingRight="10dp"
                 android:text="Timestamp"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivPostPic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tvTime"
+                android:layout_below="@+id/tvPost"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="107dp"
+                android:layout_marginTop="-16dp"
+                android:layout_marginBottom="-1dp"
+                tools:srcCompat="@tools:sample/avatars" />
 
         </RelativeLayout>
 
@@ -180,7 +178,6 @@
             android:layout_marginStart="173dp"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="93dp"
-            android:layout_toEndOf="@+id/tvUsername"
             android:paddingLeft="3dp"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/clock" />

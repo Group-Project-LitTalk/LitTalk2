@@ -2,6 +2,7 @@ package com.example.instagram2.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,8 +54,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     private String postId;
 
 
-    ImageView ivImage;
+    ImageView ivPostPic;
     ImageView imageView2;
+
+    //sharedPref.getInt(getString(R.string.saved_high_score_key), defaultValue);
+
+   //     Glide.with(context).load(post.getImage().getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
 
     public ChatAdapter(Context context, String userId, List<Message> messages) {
         mMessages = messages;
@@ -97,7 +102,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             body.setText(message.getBody());
             name.setText(message.getUserId()); // in addition to message show user ID
           //  tvPost.setText(PostsAdapter.tvDescription);
-            gettingPostInfo(postId);
+          //  gettingPostInfo(postId);
         }
     }
 
@@ -119,7 +124,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                     .circleCrop() // create an effect of a round profile picture
                     .into(imageMe);
             body.setText(message.getBody());
-            gettingPostInfo(postId);
+           // gettingPostInfo(postId);
         }
 
 
@@ -182,8 +187,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         return message.getUserId() != null && message.getUserId().equals(mUserId);
     }
 
-    public void gettingPostInfo(String objectId)
+    public void gettingImagePostInfo(String objectId)
     {
+
         /*
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
