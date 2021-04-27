@@ -188,9 +188,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     // object will be your game score
-                    Glide.with(mContext).load(object.getParseFile("image").getUrl()).override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
-
-                            //    .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
+                //    Glide.with(mContext).load(object.getParseFile("image").getUrl())
+                    //    .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
 
                     tvPost.setText(object.getString("description"));
 
