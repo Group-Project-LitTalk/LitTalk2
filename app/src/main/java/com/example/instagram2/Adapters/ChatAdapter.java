@@ -2,6 +2,7 @@ package com.example.instagram2.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.instagram2.BookClasses.BookActivity;
 import com.example.instagram2.ChatActivity;
 import com.example.instagram2.LoginActivity;
+import com.example.instagram2.Main.MainActivity;
 import com.example.instagram2.Message;
 import com.example.instagram2.Post;
 import com.example.instagram2.R;
@@ -40,6 +42,8 @@ import java.util.Map;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
 
+    public static final String TAG = "ChatAdapter";
+
     private static final int MESSAGE_OUTGOING = 123;
     private static final int MESSAGE_INCOMING = 321;
 
@@ -49,10 +53,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     private String postId;
 
 
-    TextView tvPost;
     ImageView ivImage;
-
-
+    ImageView imageView2;
 
     public ChatAdapter(Context context, String userId, List<Message> messages) {
         mMessages = messages;
@@ -95,7 +97,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             body.setText(message.getBody());
             name.setText(message.getUserId()); // in addition to message show user ID
           //  tvPost.setText(PostsAdapter.tvDescription);
-            gettingPostInfo(postId, tvPost, ivImage);
+            gettingPostInfo(postId);
         }
     }
 
@@ -117,7 +119,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                     .circleCrop() // create an effect of a round profile picture
                     .into(imageMe);
             body.setText(message.getBody());
-            gettingPostInfo(postId, tvPost, ivImage);
+            gettingPostInfo(postId);
         }
 
 
@@ -180,17 +182,23 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         return message.getUserId() != null && message.getUserId().equals(mUserId);
     }
 
-    public void gettingPostInfo(String objectId, TextView tvPost, ImageView ivImage)
+    public void gettingPostInfo(String objectId)
     {
+        /*
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Post description: ");
+                Intent i = new Intent(mContext, MainActivity.class);
+                mContext.startActivity(i);
+            }
+        });
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
 
         query.getInBackground(postId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    // object will be your game score
-                //    Glide.with(mContext).load(object.getParseFile("image").getUrl())
-                    //    .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
-
                     tvPost.setText(object.getString("description"));
 
                 } else {
@@ -198,7 +206,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                 }
             }
         });
-
+            */
     }
 
 }

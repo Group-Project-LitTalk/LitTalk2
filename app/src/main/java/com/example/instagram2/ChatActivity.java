@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram2.Adapters.ChatAdapter;
+import com.example.instagram2.Main.MainActivity;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -58,9 +60,8 @@ public class ChatActivity extends AppCompatActivity {
     ImageButton btSend;
     TextView tvPost;
     TextView tvUsername;
-    ImageView ivImage;
     TextView tvTime;
-    ImageView imageView2;
+    ImageView backArrow;
 
     int contextMenuIndexClicked = -1;
     boolean isEditMode = false;
@@ -111,9 +112,8 @@ public class ChatActivity extends AppCompatActivity {
 
         tvPost = (TextView) findViewById(R.id.tvPost);
         tvUsername = (TextView) findViewById(R.id.tvUsername);
-        ivImage = (ImageView) findViewById(R.id.ivImage);
         tvTime = (TextView) findViewById(R.id.tvTime);
-        imageView2 = (ImageView) findViewById(R.id.imageView2);
+        backArrow = (ImageView) findViewById(R.id.backArrow);
 
         gettingPostInfo(postId, tvPost, tvUsername, tvTime);
         setupMessagePosting();
@@ -165,6 +165,15 @@ public class ChatActivity extends AppCompatActivity {
     public void gettingPostInfo(String objectId, TextView tvPost, TextView tvUsername, TextView tvTime)
     {
 
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                goToActivity(MainActivity.class);
+                Log.d(TAG, "It worked");
+            }
+        });
+
         tvUsername.setText(getIntent().getStringExtra("username"));
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
 
@@ -174,13 +183,17 @@ public class ChatActivity extends AppCompatActivity {
                     // object will be your game score
                     ParseUser user = object.getParseUser(postId);
 
-                    Log.d("ChatActivity", object.getString("description"));
-                    Log.d("ChatActivity", tvUsername.toString());
+                   // Log.d("ChatActivity", object.getString("description"));
+                   // Log.d("ChatActivity", tvUsername.toString());
 
+                    Log.d(TAG, "Post description: " + object.getString("description"));
                     tvPost.setText(object.getString("description"));
+
+                    Log.d(TAG, "Post Date: " + getDate(object));
                     tvTime.setText(getDate(object));
 
                 } else {
+                    Log.d(TAG, "Something is wrong");
                     // something went wrong
                 }
             }
@@ -262,5 +275,11 @@ public class ChatActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    private void goToActivity(Class targetClass) {
+
+        Intent i = new Intent(this, targetClass);
+        startActivity(i);
+        finish();
+    }
 
 }
