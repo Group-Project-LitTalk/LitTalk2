@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.example.instagram2.BookClasses.BookActivity;
 import com.example.instagram2.ChatActivity;
 import com.example.instagram2.CommentClasses.Comment;
@@ -161,8 +162,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             });
 
             if (image != null)
-                Glide.with(context).load(post.getImage().getUrl())
-                        .override(ViewGroup.LayoutParams.MATCH_PARENT, 200).centerCrop().into(ivImage);
+                Glide.with(context).load(post.getImage().getUrl()).centerCrop().into(ivImage);
 
 
         }

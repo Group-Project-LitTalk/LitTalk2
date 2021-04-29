@@ -22,22 +22,22 @@
         android:textStyle="bold"
         android:typeface="serif"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivImage"
         tools:text="Lilian" />
 
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:cropToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:maxLength="200"
@@ -45,8 +45,9 @@
         android:paddingTop="3dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
         tools:text="trying to look cool" />
 
     <TextView
@@ -61,7 +62,7 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
         app:layout_constraintStart_toEndOf="@+id/tvUsername"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tvUsername" />
 
     <TextView
         android:id="@+id/tvTime"
@@ -70,9 +71,8 @@
         android:paddingRight="20dp"
         android:text="Timestamp"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ivImage" />
 
     <TextView
         android:id="@+id/tvReply"
@@ -92,9 +92,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="3dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTime"
         app:layout_constraintEnd_toStartOf="@+id/tvTime"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTime"
         app:srcCompat="@drawable/clock" />
 
     <Button
@@ -103,8 +103,7 @@
         android:layout_height="25dp"
         android:background="@drawable/trash"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintBottom_toTopOf="@+id/ivImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ivImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
