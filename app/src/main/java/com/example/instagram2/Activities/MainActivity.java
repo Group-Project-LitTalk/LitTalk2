@@ -1,4 +1,4 @@
-package com.example.instagram2.Main;
+package com.example.instagram2.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import com.example.instagram2.Fragments.ComposeFragment;
 import com.example.instagram2.Fragments.PostFragment;
 import com.example.instagram2.Fragments.ProfileFragment;
 import com.example.instagram2.R;
-import com.example.instagram2.Search.SearchActivity;
+import com.example.instagram2.Activities.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

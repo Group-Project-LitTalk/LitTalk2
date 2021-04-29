@@ -1,9 +1,6 @@
 package com.example.instagram2.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,31 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.instagram2.BookClasses.BookActivity;
-import com.example.instagram2.ChatActivity;
-import com.example.instagram2.LoginActivity;
-import com.example.instagram2.Main.MainActivity;
-import com.example.instagram2.Message;
-import com.example.instagram2.Post;
+import com.example.instagram2.Models.Message;
 import com.example.instagram2.R;
-import com.example.instagram2.TimeFormatter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.parse.DeleteCallback;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
 

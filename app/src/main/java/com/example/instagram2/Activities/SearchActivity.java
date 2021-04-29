@@ -1,7 +1,6 @@
-package com.example.instagram2.Search;
+package com.example.instagram2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,30 +8,17 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.instagram2.Adapters.PostsAdapter;
-import com.example.instagram2.BookClasses.Book;
-import com.example.instagram2.BookClasses.BookAdapter;
-import com.example.instagram2.Post;
+import com.example.instagram2.Models.Book;
+import com.example.instagram2.Adapters.BookAdapter;
 import com.example.instagram2.R;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import okhttp3.Headers;

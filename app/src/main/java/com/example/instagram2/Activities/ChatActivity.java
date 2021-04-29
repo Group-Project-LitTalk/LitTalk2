@@ -1,13 +1,11 @@
-package com.example.instagram2;
+package com.example.instagram2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,8 +19,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram2.Adapters.ChatAdapter;
-import com.example.instagram2.Main.MainActivity;
-import com.parse.DeleteCallback;
+import com.example.instagram2.Models.Message;
+import com.example.instagram2.R;
+import com.example.instagram2.TimeFormatter;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.LogInCallback;
@@ -39,9 +38,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class ChatActivity extends AppCompatActivity {

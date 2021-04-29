@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram2.Adapters.PostsAdapter;
-import com.example.instagram2.LoginActivity;
-import com.example.instagram2.Post;
+import com.example.instagram2.Activities.LoginActivity;
+import com.example.instagram2.Models.Post;
 import com.example.instagram2.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;

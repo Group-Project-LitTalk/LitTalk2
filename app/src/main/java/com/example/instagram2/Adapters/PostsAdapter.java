@@ -2,7 +2,6 @@ package com.example.instagram2.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.target.Target;
-import com.example.instagram2.BookClasses.BookActivity;
-import com.example.instagram2.ChatActivity;
-import com.example.instagram2.CommentClasses.Comment;
-import com.example.instagram2.CommentClasses.CommentActivity;
-import com.example.instagram2.Post;
+import com.example.instagram2.Activities.BookActivity;
+import com.example.instagram2.Activities.ChatActivity;
+import com.example.instagram2.Models.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
 import com.parse.DeleteCallback;

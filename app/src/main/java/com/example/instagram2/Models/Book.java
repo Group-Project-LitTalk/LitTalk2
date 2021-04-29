@@ -1,4 +1,4 @@
-package com.example.instagram2.BookClasses;
+package com.example.instagram2.Models;
 
 import android.util.Log;
 

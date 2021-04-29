@@ -1,4 +1,4 @@
-package com.example.instagram2.BookClasses;
+package com.example.instagram2.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

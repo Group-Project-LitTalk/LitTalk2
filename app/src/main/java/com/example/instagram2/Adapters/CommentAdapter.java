@@ -1,4 +1,4 @@
-package com.example.instagram2.CommentClasses;
+package com.example.instagram2.Adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagram2.Models.Comment;
 import com.example.instagram2.R;
 
 import java.math.BigInteger;
