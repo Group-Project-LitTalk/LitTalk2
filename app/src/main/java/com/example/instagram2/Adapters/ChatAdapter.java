@@ -166,7 +166,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
     @Override
     public int getItemViewType(int position) {
-        //TODO: Returning message outgoing results in an error. It however doesn't seem at all necessary. ~Alex
         //if (isMe(position)) {
             //return MESSAGE_OUTGOING;
         //} else {
