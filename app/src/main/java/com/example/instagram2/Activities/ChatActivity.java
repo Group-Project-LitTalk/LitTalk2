@@ -63,6 +63,7 @@ public class ChatActivity extends AppCompatActivity {
     TextView tvTime;
     ImageView backArrow;
     ImageView ivPostPic;
+    ImageView ivPostProfile;
 
     int contextMenuIndexClicked = -1;
     boolean isEditMode = false;
@@ -227,11 +228,14 @@ public class ChatActivity extends AppCompatActivity {
 
                     Log.d(TAG, "Post Date: " + getDate(object));
                     tvTime.setText(getDate(object));
-
-                    if(getIntent().getStringExtra("imageP") != null)
+                    String postPic = getIntent().getStringExtra("imageP");
+                    if(postPic != null)
                     {
+                        ivPostPic.setVisibility(View.VISIBLE);
                         Glide.with(activity).load(getIntent().getStringExtra("imageP"))
                                 .override(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT).fitCenter().into(ivPostPic);
+                    } else {
+                        ivPostPic.setVisibility(View.GONE);
                     }
 
 

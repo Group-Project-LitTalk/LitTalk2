@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram2.Models.Message;
-import com.example.instagram2.Models.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
 
@@ -69,7 +68,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
         public IncomingMessageViewHolder(View itemView) {
             super(itemView);
-            imageOther = (ImageView)itemView.findViewById(R.id.ivProfileOther);
+            imageOther = (ImageView)itemView.findViewById(R.id.ivPostProfile);
             body = (TextView)itemView.findViewById(R.id.tvBody);
             name = (TextView)itemView.findViewById(R.id.tvName);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);

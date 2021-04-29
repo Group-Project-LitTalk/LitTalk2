@@ -16,7 +16,6 @@ public class Post extends ParseObject  {
     public static final String KEY_BOOK_ID = "BookID";
     public static final String KEY_BOOK_TITLE = "BookTitle";
 
-
     public String getDescription()
     {
         return getString(KEY_DESCRIPTION);
