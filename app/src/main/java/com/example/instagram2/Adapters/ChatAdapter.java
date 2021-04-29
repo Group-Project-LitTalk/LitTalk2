@@ -166,17 +166,18 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
     @Override
     public int getItemViewType(int position) {
-        if (isMe(position)) {
-            return MESSAGE_OUTGOING;
-        } else {
+        //TODO: Returning message outgoing results in an error. It however doesn't seem at all necessary. ~Alex
+        //if (isMe(position)) {
+            //return MESSAGE_OUTGOING;
+        //} else {
             return MESSAGE_INCOMING;
-        }
+        //}
     }
 
-    private boolean isMe(int position) {
+   /* private boolean isMe(int position) {
         Message message = mMessages.get(position);
         return message.getUserId() != null && message.getUserId().equals(mUserId);
-    }
+    }*/
 
     private String getDate(Message message) {
         Date date = message.getCreatedAt();
