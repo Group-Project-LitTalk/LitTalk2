@@ -19,7 +19,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-
         android:layout_marginTop="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="-5dp"
@@ -66,7 +65,8 @@
     <RelativeLayout
         android:id="@+id/rlPost"
         android:layout_width="match_parent"
-        android:layout_height="277dp">
+        android:layout_height="277dp"
+        android:background="@drawable/relativelayout_custom_border">
 
         <ImageView
             android:id="@+id/backArrow"

@@ -13,10 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram2.Models.Message;
+import com.example.instagram2.Models.Post;
 import com.example.instagram2.R;
+import com.example.instagram2.TimeFormatter;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
@@ -60,13 +65,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         ImageView imageOther;
         TextView body;
         TextView name;
+        TextView tvTime;
 
         public IncomingMessageViewHolder(View itemView) {
             super(itemView);
             imageOther = (ImageView)itemView.findViewById(R.id.ivProfileOther);
             body = (TextView)itemView.findViewById(R.id.tvBody);
             name = (TextView)itemView.findViewById(R.id.tvName);
-
+            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
         }
 
         @Override
@@ -78,6 +84,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
             body.setText(message.getBody());
             name.setText(message.getUsername());
+            tvTime.setText(getDate(message));
          //   tvUsername.setText(post.getUser().getUsername());
          //   name.setText(message.getU); // in addition to message show user ID
         }
@@ -87,12 +94,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         ImageView imageMe;
         TextView body;
         TextView tvNameOut;
+        TextView tvTimeO;
 
         public OutgoingMessageViewHolder(View itemView) {
             super(itemView);
             imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
             body = (TextView)itemView.findViewById(R.id.tvBody);
             tvNameOut = (TextView) itemView.findViewById(R.id.tvNameOut);
+            tvTimeO = (TextView) itemView.findViewById(R.id.tvTimeO);
         }
 
         @Override
@@ -106,6 +115,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
             Log.d(TAG, "username: " + message.getUsername());
             tvNameOut.setText(message.getUsername());
+            tvTimeO.setText(getDate(message));
            // gettingPostInfo(postId);
         }
 
@@ -169,34 +179,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         return message.getUserId() != null && message.getUserId().equals(mUserId);
     }
 
-    public void gettingImagePostInfo(String objectId)
-    {
-
-        /*
-        backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "Post description: ");
-                Intent i = new Intent(mContext, MainActivity.class);
-                mContext.startActivity(i);
-            }
-        });
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
-
-        query.getInBackground(postId, new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    tvPost.setText(object.getString("description"));
-
-                } else {
-                    // something went wrong
-                }
-            }
-        });
-            */
+    private String getDate(Message message) {
+        Date date = message.getCreatedAt();
+        DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
+        String time = TimeFormatter.getTimeDifference(df.format(date));
+        return time;
     }
-
 }
 
 

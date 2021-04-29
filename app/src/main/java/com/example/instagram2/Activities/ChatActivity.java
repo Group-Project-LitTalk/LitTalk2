@@ -137,7 +137,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // associate the LayoutManager with the RecylcerView
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatActivity.this);
-        linearLayoutManager.setReverseLayout(true);
+        //linearLayoutManager.setReverseLayout(true);
         rvChat.setLayoutManager(linearLayoutManager);
 
         // When send button is clicked, create message object on Parse

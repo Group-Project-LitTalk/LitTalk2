@@ -6,7 +6,7 @@
     android:paddingLeft="15dp"
     android:paddingRight="60dp"
     android:clipToPadding="false"
-    android:background="@color/grey">
+    android:background="@drawable/relativelayout_custom_border">
 
     <TextView
         android:id="@+id/tvNameOut"
@@ -18,7 +18,8 @@
         android:paddingBottom="4dp"
         android:text="Johny Lindsey"
         android:textSize="20dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
     <ImageView
         android:id="@+id/ivProfileMe"
@@ -38,5 +39,17 @@
         android:paddingHorizontal="16dp"
         android:elevation="2dp"
         android:textSize="18dp"
-        android:text="Someone else's message" />
+        android:text="Someone else's message"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTimeO"
+        android:text="Timestamp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@id/tvBody"
+        android:layout_alignLeft="@id/tvNameOut"/>
 </RelativeLayout>
