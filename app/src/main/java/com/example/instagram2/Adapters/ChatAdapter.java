@@ -99,20 +99,22 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                     .into(imageOther);
 
             body.setText(message.getBody());
-            name.setText(message.getUserId()); // in addition to message show user ID
-          //  tvPost.setText(PostsAdapter.tvDescription);
-          //  gettingPostInfo(postId);
+            name.setText(message.getUsername());
+         //   tvUsername.setText(post.getUser().getUsername());
+         //   name.setText(message.getU); // in addition to message show user ID
         }
     }
 
     public class OutgoingMessageViewHolder extends MessageViewHolder {
         ImageView imageMe;
         TextView body;
+        TextView tvNameOut;
 
         public OutgoingMessageViewHolder(View itemView) {
             super(itemView);
             imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
             body = (TextView)itemView.findViewById(R.id.tvBody);
+            tvNameOut = (TextView) itemView.findViewById(R.id.tvNameOut);
         }
 
         @Override
@@ -123,6 +125,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                     .circleCrop() // create an effect of a round profile picture
                     .into(imageMe);
             body.setText(message.getBody());
+
+            Log.d(TAG, "username: " + message.getUsername());
+            tvNameOut.setText(message.getUsername());
            // gettingPostInfo(postId);
         }
 

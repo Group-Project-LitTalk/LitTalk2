@@ -9,6 +9,7 @@ public class Message extends ParseObject {
     public static final String USER_ID_KEY = "userId";
     public static final String BODY_KEY = "body";
     public static final String POST_ID_KEY = "PointerPost";
+    public static final String USERNAME = "username";
 
     public String getUserId() {
         return getString(USER_ID_KEY);
@@ -30,5 +31,7 @@ public class Message extends ParseObject {
 
     public void setPostId(String PostId) { put(POST_ID_KEY, PostId); }
 
+    public String getUsername(){return getString(USERNAME);}
 
+    public void setUsername(String username) {put(USERNAME, username); }
 }

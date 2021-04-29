@@ -96,7 +96,8 @@ public class ChatActivity extends AppCompatActivity {
                 SubscriptionHandling.HandleEventCallback<Message>() {
                     @Override
                     public void onEvent(ParseQuery <Message> query, Message object) {
-                        mMessages.add(0, object);
+
+                            mMessages.add(0, object);
 
                         // RecyclerView updates need to be run on the UI thread
                         runOnUiThread(new Runnable() {
@@ -158,6 +159,12 @@ public class ChatActivity extends AppCompatActivity {
 
                 message.setPostId(postId);
 
+                ParseUser user = ParseUser.getCurrentUser();
+
+             //   Log.d(TAG, "Username: " + user.getUsername());
+                message.setUsername(user.getUsername());
+
+                Log.d(TAG, "Username: " + message.getUsername());
                 //message.setUserId(ParseUser.getCurrentUser().getObjectId());
 
                 message.saveInBackground(new SaveCallback() {
@@ -269,10 +276,16 @@ public class ChatActivity extends AppCompatActivity {
                 if (e == null) {
                     mMessages.clear();
 
-                    for(Message message: messages)
-                        Log.d(TAG, "Message stuff: " + message.getPostId());
+                    List <Message> temp = new ArrayList<>();
 
-                    mMessages.addAll(messages);
+                    for (Message message : messages)
+                    {
+                        if(postId.equals(message.getPostId())) temp.add(message);
+                    }
+                    mMessages.addAll(temp);
+
+                    temp.clear();
+                   // mMessages.addAll(messages);
 //                    holdKey.get(postId).addAll(messages);
                     mAdapter.notifyDataSetChanged(); // update adapter
                     // Scroll to the bottom of the list on initial load
