@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.target.Target;
 import com.example.instagram2.BookClasses.BookActivity;
 import com.example.instagram2.ChatActivity;
@@ -159,11 +160,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             });
 
             if (image != null) {
-                Glide.with(context).load(post.getImage().getUrl()).centerCrop().into(ivImage);
-            } else {ivImage.setImageBitmap(null);}
+                ivImage.setVisibility(View.VISIBLE);
+                Glide.with(context).load(post.getImage().getUrl()).transform(new RoundedCorners(80)).centerCrop().into(ivImage);
+            } else {
+                ivImage.setImageBitmap(null);
+                ivImage.setVisibility(View.GONE);
+            }
         }
 
-        private void determineXML (){
+        private void determineXML() {
 
         }
 
