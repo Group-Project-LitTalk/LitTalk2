@@ -87,15 +87,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         }
 
-        public void helpDelete(String objectId)
-        {
-            ParseQuery <ParseObject> posts = ParseQuery.getQuery("Post");
+        public void helpDelete(String objectId) {
+            ParseQuery<ParseObject> posts = ParseQuery.getQuery("Post");
             // Query parameters based on the item name
             posts.whereEqualTo("objectId", objectId);
 
             posts.findInBackground(new FindCallback<ParseObject>() {
                 @Override
-                public void done(final List <ParseObject> player, ParseException e) {
+                public void done(final List<ParseObject> player, ParseException e) {
                     if (e == null) {
 
                         player.get(0).deleteInBackground(new DeleteCallback() {
@@ -111,9 +110,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     } else {
                         // Something is wrong
                     }
-                };
-            });
+                }
 
+                ;
+            });
         }
 
         public void bind(Post post) {
@@ -138,16 +138,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     Intent i = new Intent(context, ChatActivity.class);
                     i.putExtra("user", post.getObjectId());
                     i.putExtra("username", post.getUser().getUsername());
 
-                    if (post.getImage() != null)
-                    {
+                    if (post.getImage() != null) {
                         i.putExtra("imageP", post.getImage().getUrl());
                     }
-
                     context.startActivity(i);
                 }
             });
@@ -161,9 +158,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
-            if (image != null)
+            if (image != null) {
                 Glide.with(context).load(post.getImage().getUrl()).centerCrop().into(ivImage);
+            } else {ivImage.setImageBitmap(null);}
+        }
 
+        private void determineXML (){
 
         }
 
@@ -173,8 +173,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             String time = TimeFormatter.getTimeDifference(df.format(date));
             return time;
         }
-
-
     }
 }
 
