@@ -168,10 +168,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             }
         }
 
-        private void determineXML() {
-
-        }
-
         private String getDate(Post post) {
             Date date = post.getCreatedAt();
             DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
