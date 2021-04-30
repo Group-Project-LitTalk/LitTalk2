@@ -1,4 +1,4 @@
-package com.example.instagram2.CommentClasses;
+package com.example.instagram2.Activities;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.instagram2.Message;
+import com.example.instagram2.Adapters.CommentAdapter;
+import com.example.instagram2.Models.Comment;
+import com.example.instagram2.Models.Message;
 import com.example.instagram2.R;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;

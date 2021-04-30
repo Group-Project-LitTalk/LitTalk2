@@ -1,13 +1,11 @@
-package com.example.instagram2;
+package com.example.instagram2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,8 +19,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram2.Adapters.ChatAdapter;
-import com.example.instagram2.Main.MainActivity;
-import com.parse.DeleteCallback;
+import com.example.instagram2.Models.Message;
+import com.example.instagram2.R;
+import com.example.instagram2.TimeFormatter;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.LogInCallback;
@@ -35,13 +34,13 @@ import com.parse.SaveCallback;
 import com.parse.livequery.ParseLiveQueryClient;
 import com.parse.livequery.SubscriptionHandling;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class ChatActivity extends AppCompatActivity {
@@ -66,6 +65,7 @@ public class ChatActivity extends AppCompatActivity {
     TextView tvTime;
     ImageView backArrow;
     ImageView ivPostPic;
+    ImageView ivPostProfile;
 
     int contextMenuIndexClicked = -1;
     boolean isEditMode = false;
@@ -95,9 +95,9 @@ public class ChatActivity extends AppCompatActivity {
         subscriptionHandling.handleEvent(SubscriptionHandling.Event.CREATE, new
                 SubscriptionHandling.HandleEventCallback<Message>() {
                     @Override
-                    public void onEvent(ParseQuery <Message> query, Message object) {
+                    public void onEvent(ParseQuery<Message> query, Message object) {
 
-                            mMessages.add(0, object);
+                        mMessages.add(0, object);
 
                         // RecyclerView updates need to be run on the UI thread
                         runOnUiThread(new Runnable() {
@@ -119,6 +119,7 @@ public class ChatActivity extends AppCompatActivity {
         tvTime = (TextView) findViewById(R.id.tvTime);
         backArrow = (ImageView) findViewById(R.id.backArrow);
         ivPostPic = (ImageView) findViewById(R.id.ivPostPic);
+        ivPostProfile = (ImageView) findViewById(R.id.ivPostProfile);
 
         gettingPostInfo(postId, tvPost, tvUsername, tvTime, ivPostPic);
         setupMessagePosting();
@@ -140,7 +141,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // associate the LayoutManager with the RecylcerView
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatActivity.this);
-        linearLayoutManager.setReverseLayout(true);
+        //linearLayoutManager.setReverseLayout(true);
         rvChat.setLayoutManager(linearLayoutManager);
 
         // When send button is clicked, create message object on Parse
@@ -158,10 +159,10 @@ public class ChatActivity extends AppCompatActivity {
                 //tvUsername.setText(post.getUser().getUsername());
 
                 message.setPostId(postId);
-
                 ParseUser user = ParseUser.getCurrentUser();
+                message.setUser(user);
 
-             //   Log.d(TAG, "Username: " + user.getUsername());
+                //   Log.d(TAG, "Username: " + user.getUsername());
                 message.setUsername(user.getUsername());
 
                 Log.d(TAG, "Username: " + message.getUsername());
@@ -181,8 +182,7 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    public void attemptPostInfo(Message message)
-    {
+    public void attemptPostInfo(Message message) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
 
         query.getInBackground(postId, new GetCallback<ParseObject>() {
@@ -200,8 +200,7 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    public void gettingPostInfo(String objectId, TextView tvPost, TextView tvUsername, TextView tvTime, ImageView ivPostPic)
-    {
+    public void gettingPostInfo(String objectId, TextView tvPost, TextView tvUsername, TextView tvTime, ImageView ivPostPic) {
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,30 +212,32 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         tvUsername.setText(getIntent().getStringExtra("username"));
-
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
-
         query.getInBackground(postId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    // object will be your game score
-                    ParseUser user = object.getParseUser(postId);
-
-                   // Log.d("ChatActivity", object.getString("description"));
-                   // Log.d("ChatActivity", tvUsername.toString());
+                    ParseUser user = object.getParseUser("user");
+                    if(user != null) {
+                        String profileURL = getProfileUrl(user.getObjectId());
+                        Glide.with(activity)
+                                .load(profileURL)
+                                .circleCrop() // create an effect of a round profile picture
+                                .into(ivPostProfile);
+                    }
+                    // Log.d("ChatActivity", object.getString("description"));
+                    // Log.d("ChatActivity", tvUsername.toString());
 
                     Log.d(TAG, "Post description: " + object.getString("description"));
                     tvPost.setText(object.getString("description"));
 
                     Log.d(TAG, "Post Date: " + getDate(object));
                     tvTime.setText(getDate(object));
-
-                    if(getIntent().getStringExtra("imageP") != null)
-                    {
+                    String postPic = getIntent().getStringExtra("imageP");
+                    if (postPic != null) {
+                        ivPostPic.setVisibility(View.VISIBLE);
                         Glide.with(activity).load(getIntent().getStringExtra("imageP"))
                                 .override(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT).fitCenter().into(ivPostPic);
-                    }
-
+                    } else { ivPostPic.setVisibility(View.GONE); }
 
                 } else {
                     Log.d(TAG, "Something is wrong");
@@ -244,9 +245,7 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
 
     void login() {
         ParseAnonymousUtils.logIn(new LogInCallback() {
@@ -276,16 +275,15 @@ public class ChatActivity extends AppCompatActivity {
                 if (e == null) {
                     mMessages.clear();
 
-                    List <Message> temp = new ArrayList<>();
+                    List<Message> temp = new ArrayList<>();
 
-                    for (Message message : messages)
-                    {
-                        if(postId.equals(message.getPostId())) temp.add(message);
+                    for (Message message : messages) {
+                        if (postId.equals(message.getPostId())) temp.add(message);
                     }
                     mMessages.addAll(temp);
 
                     temp.clear();
-                   // mMessages.addAll(messages);
+                    // mMessages.addAll(messages);
 //                    holdKey.get(postId).addAll(messages);
                     mAdapter.notifyDataSetChanged(); // update adapter
                     // Scroll to the bottom of the list on initial load
@@ -338,5 +336,16 @@ public class ChatActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-
+    private static String getProfileUrl(final String userId) {
+        String hex = "";
+        try {
+            final MessageDigest digest = MessageDigest.getInstance("MD5");
+            final byte[] hash = digest.digest(userId.getBytes());
+            final BigInteger bigInt = new BigInteger(hash);
+            hex = bigInt.abs().toString(16);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "https://www.gravatar.com/avatar/" + hex + "?d=identicon";
+    }
 }

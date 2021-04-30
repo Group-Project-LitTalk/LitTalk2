@@ -1,4 +1,4 @@
-package com.example.instagram2;
+package com.example.instagram2.Models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
@@ -15,7 +15,6 @@ public class Post extends ParseObject  {
     public static final String KEY_CREATED_KEY = "createdAt";
     public static final String KEY_BOOK_ID = "BookID";
     public static final String KEY_BOOK_TITLE = "BookTitle";
-
 
     public String getDescription()
     {

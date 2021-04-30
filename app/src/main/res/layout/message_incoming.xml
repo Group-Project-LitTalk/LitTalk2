@@ -6,13 +6,13 @@
     android:paddingLeft="15dp"
     android:paddingRight="60dp"
     android:clipToPadding="false"
-    android:background="@color/black">
+    android:background="@drawable/relativelayout_custom_border">
 
     <TextView
         android:id="@+id/tvName"
         android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/ivProfileOther"
-        android:layout_alignTop="@+id/ivProfileOther"
+        android:layout_toRightOf="@+id/ivPostProfile"
+        android:layout_alignTop="@+id/ivPostProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="4dp"
@@ -22,7 +22,7 @@
         android:textStyle="bold"/>
 
     <ImageView
-        android:id="@+id/ivProfileOther"
+        android:id="@+id/ivPostProfile"
         android:layout_alignParentLeft="true"
         android:contentDescription="@string/profile_other"
         android:layout_width="64dp"
@@ -40,8 +40,34 @@
         android:layout_marginTop="-2dp"
         android:elevation="2dp"
         android:paddingHorizontal="8dp"
-        android:paddingVertical="12dp"
+        android:paddingVertical="10dp"
         android:text="Someone else's message"
         android:textColor="@color/white"
         android:textSize="18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTime"
+        android:text="Timestamp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@id/tvBody"
+        android:layout_alignLeft="@id/tvName"/>
+
+    <!-- <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="8dp"
+        android:paddingRight="10dp"
+        android:text="Timestamp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" /> -->
 </RelativeLayout>

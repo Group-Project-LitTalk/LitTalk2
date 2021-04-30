@@ -1,6 +1,5 @@
 package com.example.instagram2.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,10 +26,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.instagram2.BookClasses.BookActivity;
-import com.example.instagram2.Post;
+import com.example.instagram2.Models.Post;
 import com.example.instagram2.R;
-import com.example.instagram2.Search.SearchActivity;
+import com.example.instagram2.Activities.SearchActivity;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;

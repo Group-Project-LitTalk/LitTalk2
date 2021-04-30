@@ -1,4 +1,4 @@
-package com.example.instagram2.BookClasses;
+package com.example.instagram2.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.instagram2.Fragments.ComposeFragment;
-import com.example.instagram2.Main.MainActivity;
+import com.example.instagram2.Activities.MainActivity;
+import com.example.instagram2.Models.Book;
 import com.example.instagram2.R;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(context, MainActivity.class);
-                    i.putExtra("ID",book.BookId);
+                    i.putExtra("ID",book.getBookId());
                     i.putExtra("Title",book.getTitle());
                     context.startActivity(i);
                     ((Activity) context).finish();

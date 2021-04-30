@@ -1,9 +1,6 @@
 package com.example.instagram2.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,23 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.instagram2.BookClasses.BookActivity;
-import com.example.instagram2.ChatActivity;
-import com.example.instagram2.LoginActivity;
-import com.example.instagram2.Main.MainActivity;
-import com.example.instagram2.Message;
-import com.example.instagram2.Post;
+import com.example.instagram2.Models.Message;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.parse.DeleteCallback;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -39,7 +22,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
 
@@ -82,13 +64,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         ImageView imageOther;
         TextView body;
         TextView name;
+        TextView tvTime;
 
         public IncomingMessageViewHolder(View itemView) {
             super(itemView);
-            imageOther = (ImageView)itemView.findViewById(R.id.ivProfileOther);
+            imageOther = (ImageView)itemView.findViewById(R.id.ivPostProfile);
             body = (TextView)itemView.findViewById(R.id.tvBody);
             name = (TextView)itemView.findViewById(R.id.tvName);
-
+            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
         }
 
         @Override
@@ -100,6 +83,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
             body.setText(message.getBody());
             name.setText(message.getUsername());
+            tvTime.setText(getDate(message));
          //   tvUsername.setText(post.getUser().getUsername());
          //   name.setText(message.getU); // in addition to message show user ID
         }
@@ -109,12 +93,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         ImageView imageMe;
         TextView body;
         TextView tvNameOut;
+        TextView tvTimeO;
 
         public OutgoingMessageViewHolder(View itemView) {
             super(itemView);
             imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
             body = (TextView)itemView.findViewById(R.id.tvBody);
             tvNameOut = (TextView) itemView.findViewById(R.id.tvNameOut);
+            tvTimeO = (TextView) itemView.findViewById(R.id.tvTimeO);
         }
 
         @Override
@@ -128,6 +114,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
             Log.d(TAG, "username: " + message.getUsername());
             tvNameOut.setText(message.getUsername());
+            tvTimeO.setText(getDate(message));
            // gettingPostInfo(postId);
         }
 
@@ -179,46 +166,24 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
     @Override
     public int getItemViewType(int position) {
-        if (isMe(position)) {
-            return MESSAGE_OUTGOING;
-        } else {
+        //if (isMe(position)) {
+            //return MESSAGE_OUTGOING;
+        //} else {
             return MESSAGE_INCOMING;
-        }
+        //}
     }
 
-    private boolean isMe(int position) {
+   /* private boolean isMe(int position) {
         Message message = mMessages.get(position);
         return message.getUserId() != null && message.getUserId().equals(mUserId);
+    }*/
+
+    private String getDate(Message message) {
+        Date date = message.getCreatedAt();
+        DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
+        String time = TimeFormatter.getTimeDifference(df.format(date));
+        return time;
     }
-
-    public void gettingImagePostInfo(String objectId)
-    {
-
-        /*
-        backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "Post description: ");
-                Intent i = new Intent(mContext, MainActivity.class);
-                mContext.startActivity(i);
-            }
-        });
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
-
-        query.getInBackground(postId, new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    tvPost.setText(object.getString("description"));
-
-                } else {
-                    // something went wrong
-                }
-            }
-        });
-            */
-    }
-
 }
 
 

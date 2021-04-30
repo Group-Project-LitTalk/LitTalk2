@@ -23,12 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Instagram2"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Search.SearchActivity"></activity>
-        <activity android:name=".ChatActivity"></activity>
-        <activity android:name=".CommentClasses.CommentActivity"></activity>
-        <activity android:name=".BookClasses.BookActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Activities.SearchActivity"></activity>
+        <activity android:name=".Activities.ChatActivity"></activity>
+        <activity android:name=".Activities.CommentActivity"></activity>
+        <activity android:name=".Activities.BookActivity" />
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +47,7 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".Main.MainActivity" />
+        <activity android:name=".Activities.MainActivity" />
     </application>
 
 </manifest>

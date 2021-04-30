@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram2.Adapters.PostsAdapter;
-import com.example.instagram2.LoginActivity;
-import com.example.instagram2.Post;
+import com.example.instagram2.Activities.LoginActivity;
+import com.example.instagram2.Models.Post;
 import com.example.instagram2.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -33,13 +34,14 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    public static final String TAG = "PostFragment";
+    public static final String TAG = "ProfileFragment";
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
 
     private Button btnLogOut;
     private TextView tvUser;
+    private EditText etAbout;
     private ImageView ivProfile;
 
     private ParseUser currentUser;
@@ -61,6 +63,7 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvPosts = view.findViewById(R.id.rvProfilePosts);
         tvUser = view.findViewById(R.id.tvUser);
+        etAbout = view.findViewById(R.id.etAbout);
         ivProfile = view.findViewById(R.id.ivProfile);
         btnLogOut = view.findViewById(R.id.btnLogOut);
         btnLogOut.setOnClickListener(new View.OnClickListener(){
@@ -121,6 +124,7 @@ public class ProfileFragment extends Fragment {
     private void SetVariables(){
         currentUser = ParseUser.getCurrentUser();
         tvUser.setText(currentUser.getString("username"));
+        etAbout.setText(currentUser.getString("aboutMe"));
         Glide.with(getContext())
                 .load(getProfileUrl(currentUser.getObjectId()))
                 .circleCrop() // create an effect of a round profile picture

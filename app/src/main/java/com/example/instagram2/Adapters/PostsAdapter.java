@@ -21,7 +21,6 @@ import com.example.instagram2.BookClasses.BookActivity;
 import com.example.instagram2.ChatActivity;
 import com.example.instagram2.CommentClasses.Comment;
 import com.example.instagram2.CommentClasses.CommentActivity;
-import com.example.instagram2.Fragments.PostFragment;
 import com.example.instagram2.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
@@ -65,16 +64,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return posts.size();
-    }
-
-    public void clear() {
-        posts.clear();
-        notifyDataSetChanged();
-    }
-
-    public void addAll(List<PostFragment> postsList) {
-        posts.addAll(posts);
-        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

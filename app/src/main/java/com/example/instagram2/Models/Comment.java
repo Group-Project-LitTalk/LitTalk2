@@ -1,4 +1,4 @@
-package com.example.instagram2.CommentClasses;
+package com.example.instagram2.Models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
