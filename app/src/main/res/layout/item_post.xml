@@ -47,12 +47,12 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
         tools:text="trying to look cool" />
 
     <TextView
         android:id="@+id/tvPostTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:paddingLeft="5dp"
@@ -61,8 +61,9 @@
         android:textColor="#2B2B2B"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintStart_toEndOf="@+id/tvUsername"
-        app:layout_constraintTop_toTopOf="@+id/tvUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/ivImage" />
 
     <TextView
         android:id="@+id/tvTime"
@@ -71,8 +72,9 @@
         android:paddingRight="20dp"
         android:text="Timestamp"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
-        app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+        app:layout_constraintTop_toTopOf="@+id/tvUsername" />
 
     <TextView
         android:id="@+id/tvReply"
@@ -93,9 +95,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="3dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTime"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
         app:layout_constraintEnd_toStartOf="@+id/tvTime"
-        app:layout_constraintTop_toTopOf="@+id/tvTime"
+        app:layout_constraintTop_toTopOf="@+id/tvUsername"
         app:srcCompat="@drawable/clock" />
 
     <Button
@@ -104,7 +106,8 @@
         android:layout_height="25dp"
         android:background="@drawable/trash"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+        app:layout_constraintTop_toTopOf="@+id/tvUsername" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
