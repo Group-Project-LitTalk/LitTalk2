@@ -19,6 +19,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.List;
 
+import static com.example.instagram2.Profile.getProfileUrl;
+
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
     private static final int COMMENT_OUTGOING = 123;
@@ -32,7 +34,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         this.mUserId = userId;
         mContext = context;
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -48,38 +49,24 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-           ImageView imageMe;
-           TextView body;
+        ImageView imageMe;
+        TextView body;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
-            body = (TextView)itemView.findViewById(R.id.tvBody);
+            imageMe = (ImageView) itemView.findViewById(R.id.ivProfileMe);
+            body = (TextView) itemView.findViewById(R.id.tvBody);
 
         }
 
-             public void bind(Comment comment) {
-             Glide.with(mContext)
-                     .load(getProfileUrl(comment.getUserId()))
-                     .circleCrop() // create an effect of a round profile picture
-                     .into(imageMe);
-             body.setText(comment.getBody());
-         }
-
-    }
-
-    private static String getProfileUrl(final String userId) {
-        String hex = "";
-        try {
-            final MessageDigest digest = MessageDigest.getInstance("MD5");
-            final byte[] hash = digest.digest(userId.getBytes());
-            final BigInteger bigInt = new BigInteger(hash);
-            hex = bigInt.abs().toString(16);
-        } catch (Exception e) {
-            e.printStackTrace();
+        public void bind(Comment comment) {
+            Glide.with(mContext)
+                    .load(getProfileUrl(comment.getUserId()))
+                    .circleCrop() // create an effect of a round profile picture
+                    .into(imageMe);
+            body.setText(comment.getBody());
         }
-        return "https://www.gravatar.com/avatar/" + hex + "?d=identicon";
     }
 
     @Override
@@ -94,20 +81,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         Comment comment = mComments.get(position);
         holder.bind(comment);
-
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (isMe(position)) {
-            return COMMENT_OUTGOING;
-        }
-        return 0;
-    }
-
-    private boolean isMe(int position) {
-        Comment comment = mComments.get(position);
-        return comment.getUserId() != null && comment.getUserId().equals(mUserId);
+        return COMMENT_OUTGOING;
     }
 }
 
