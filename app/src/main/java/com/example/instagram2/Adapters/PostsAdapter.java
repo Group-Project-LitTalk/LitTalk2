@@ -27,11 +27,14 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static com.example.instagram2.Profile.getProfileUrl;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
@@ -67,6 +70,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         private TextView tvUsername;
         private ImageView ivImage;
+        private ImageView ivProfilePicture;
         private TextView tvDescription;
         private TextView tvTitle;
         private TextView tvTime;
@@ -77,6 +81,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
+            ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvTitle = itemView.findViewById(R.id.tvPostTitle);
             tvTime = itemView.findViewById(R.id.tvTime);
@@ -120,7 +125,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername.setText(post.getUser().getUsername());
             ParseFile image = post.getImage();
             tvTime.setText(getDate(post));
-            tvTitle.setText(post.getKeyBookTitle());
+            String profileURL = getProfileUrl(post.getUser().getObjectId());
+            Glide.with(context)
+                    .load(profileURL)
+                    .circleCrop() // create an effect of a round profile picture
+                    .into(ivProfilePicture);
+
+            String title = post.getKeyBookTitle();
+            if(title != null) {
+                tvTitle.setText(title);
+            } else {tvTitle.setVisibility(View.GONE);}
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
