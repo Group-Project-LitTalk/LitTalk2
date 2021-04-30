@@ -5,8 +5,7 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="1dp"
-    android:background="#EFEFEF"
+    android:background="@color/white"
     android:padding="5dp"
     tools:layout_editor_absoluteX="3dp"
     tools:layout_editor_absoluteY="81dp">

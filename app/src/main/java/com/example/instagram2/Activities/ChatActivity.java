@@ -43,6 +43,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static com.example.instagram2.Profile.getProfileUrl;
+
 public class ChatActivity extends AppCompatActivity {
 
     static final String TAG = ChatActivity.class.getSimpleName();
@@ -335,17 +337,5 @@ public class ChatActivity extends AppCompatActivity {
         Intent i = new Intent(this, targetClass);
         startActivity(i);
         finish();
-    }
-    private static String getProfileUrl(final String userId) {
-        String hex = "";
-        try {
-            final MessageDigest digest = MessageDigest.getInstance("MD5");
-            final byte[] hash = digest.digest(userId.getBytes());
-            final BigInteger bigInt = new BigInteger(hash);
-            hex = bigInt.abs().toString(16);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "https://www.gravatar.com/avatar/" + hex + "?d=identicon";
     }
 }

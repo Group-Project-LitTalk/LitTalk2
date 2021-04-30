@@ -32,6 +32,8 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.instagram2.Profile.getProfileUrl;
+
 public class ProfileFragment extends Fragment {
 
     public static final String TAG = "ProfileFragment";
@@ -129,18 +131,5 @@ public class ProfileFragment extends Fragment {
                 .load(getProfileUrl(currentUser.getObjectId()))
                 .circleCrop() // create an effect of a round profile picture
                 .into(ivProfile);
-    }
-
-    private static String getProfileUrl(final String userId) {
-        String hex = "";
-        try {
-            final MessageDigest digest = MessageDigest.getInstance("MD5");
-            final byte[] hash = digest.digest(userId.getBytes());
-            final BigInteger bigInt = new BigInteger(hash);
-            hex = bigInt.abs().toString(16);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "https://www.gravatar.com/avatar/" + hex + "?d=identicon";
     }
 }
