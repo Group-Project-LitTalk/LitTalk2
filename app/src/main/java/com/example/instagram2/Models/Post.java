@@ -5,6 +5,7 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @ParseClassName("Post")
@@ -15,6 +16,7 @@ public class Post extends ParseObject  {
     public static final String KEY_CREATED_KEY = "createdAt";
     public static final String KEY_BOOK_ID = "BookID";
     public static final String KEY_BOOK_TITLE = "BookTitle";
+    public static final String KEY_NUM_OF_LIKES = "NumberOfLikes";
 
     public String getDescription()
     {
@@ -28,6 +30,7 @@ public class Post extends ParseObject  {
     public String getKeyBookId(){
         return getString(KEY_BOOK_ID);
     }
+
     public void setBookId(String bookId)
     {
         put(KEY_BOOK_ID, bookId);
@@ -64,8 +67,26 @@ public class Post extends ParseObject  {
 
     public String getUsername(){return getString(KEY_USER);}
 
+    public void setKeyNumOfLikes(int zeroOrOne)
+    {
+        int currentNum = Integer.parseInt(getKeyNumOfLikes());
+
+        if(zeroOrOne == 1) currentNum += 1; else currentNum -= 1;
+
+        String like = Integer.toString(currentNum);
+
+        put(KEY_NUM_OF_LIKES, like);
+    }
+
+    public String getKeyNumOfLikes()
+    {
+        return getString(KEY_NUM_OF_LIKES);
+    }
+
     @Override
     public String toString() {
         return " " + KEY_USER;
     }
+
+
 }

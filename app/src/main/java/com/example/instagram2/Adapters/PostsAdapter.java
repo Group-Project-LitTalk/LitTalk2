@@ -82,10 +82,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvDescription;
         private TextView tvTitle;
         private TextView tvTime;
-        private TextView tvReply;
         private Button btnDelete;
         private ImageView mHeartWhite;
         private ImageView mHeartRed;
+        private ImageView speech_bubble;
+        private TextView likesDescription;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,18 +97,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvTitle = itemView.findViewById(R.id.tvPostTitle);
             tvTime = itemView.findViewById(R.id.tvTime);
-            tvReply = itemView.findViewById(R.id.tvReply);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             mHeartWhite = itemView.findViewById(R.id.image_heart_post);
             mHeartRed = itemView.findViewById(R.id.image_heart_red_post_invi);
-
-           /* mHeartRed.setVisibility(View.GONE);
-            mHeartWhite.setVisibility(View.VISIBLE);
-            mHeart = new Heart(mHeartWhite, mHeartRed);
-
-            mGestureDetector = new GestureDetector(context, new GestureListener());*/
-
-//            testToggle();
+            speech_bubble = itemView.findViewById(R.id.speech_bubble);
+            likesDescription = itemView.findViewById(R.id.image_likes);
         }
 
         private void testToggle ()
@@ -174,6 +169,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         public void bind(Post post) {
 
+
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
             ParseFile image = post.getImage();
@@ -208,9 +204,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
-            
 
-            tvReply.setOnClickListener(new View.OnClickListener() {
+            speech_bubble.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(context, ChatActivity.class);
