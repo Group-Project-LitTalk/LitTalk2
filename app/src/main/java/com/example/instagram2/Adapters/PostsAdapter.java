@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,12 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.instagram2.Activities.BookActivity;
 import com.example.instagram2.Activities.ChatActivity;
+import com.example.instagram2.Activities.Heart;
+import com.example.instagram2.Fragments.PostFragment;
 import com.example.instagram2.Models.Post;
 import com.example.instagram2.R;
 import com.example.instagram2.TimeFormatter;
@@ -41,6 +46,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     private Context context;
     private List<Post> posts;
     public static final String TAG = "PostsAdapter";
+
+    private GestureDetector mGestureDetector;
+    private Heart mHeart;
 
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
@@ -76,6 +84,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvTime;
         private TextView tvReply;
         private Button btnDelete;
+        private ImageView mHeartWhite;
+        private ImageView mHeartRed;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,7 +97,50 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvTime = itemView.findViewById(R.id.tvTime);
             tvReply = itemView.findViewById(R.id.tvReply);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            mHeartWhite = itemView.findViewById(R.id.image_heart_post);
+            mHeartRed = itemView.findViewById(R.id.image_heart_red_post_invi);
 
+           /* mHeartRed.setVisibility(View.GONE);
+            mHeartWhite.setVisibility(View.VISIBLE);
+            mHeart = new Heart(mHeartWhite, mHeartRed);
+
+            mGestureDetector = new GestureDetector(context, new GestureListener());*/
+
+//            testToggle();
+        }
+
+        private void testToggle ()
+        {
+            mHeartRed.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Log.d(TAG, "onTouch: red heart detected");
+                    return mGestureDetector.onTouchEvent(event);
+                }
+            });
+
+            mHeartWhite.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Log.d(TAG, "onTouch: white heart detected");
+                    return mGestureDetector.onTouchEvent(event);
+                }
+            });
+        }
+
+        public class GestureListener extends GestureDetector.SimpleOnGestureListener
+        {
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                Log.d(TAG, "onDoubleTap: double tap detected");
+                mHeart.toggleLike();
+                return true;
+            }
         }
 
         public void helpDelete(String objectId) {
@@ -136,6 +189,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 tvTitle.setText(title);
             } else {tvTitle.setVisibility(View.GONE);}
 
+            mHeartRed.setVisibility(View.GONE);
+            mHeartWhite.setVisibility(View.VISIBLE);
+            mHeart = new Heart(mHeartWhite, mHeartRed);
+
+            mGestureDetector = new GestureDetector(context, new GestureListener());
+
+            testToggle();
+
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -146,6 +207,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     notifyDataSetChanged();
                 }
             });
+
+            
 
             tvReply.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -170,6 +233,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
+
             if (image != null) {
                 ivImage.setVisibility(View.VISIBLE);
                 Glide.with(context).load(post.getImage().getUrl()).transform(new RoundedCorners(80)).centerCrop().into(ivImage);
@@ -178,6 +242,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 ivImage.setVisibility(View.GONE);
             }
         }
+
 
         private String getDate(Post post) {
             Date date = post.getCreatedAt();

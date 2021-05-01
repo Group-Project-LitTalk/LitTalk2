@@ -13,7 +13,6 @@ import com.example.instagram2.Fragments.ComposeFragment;
 import com.example.instagram2.Fragments.PostFragment;
 import com.example.instagram2.Fragments.ProfileFragment;
 import com.example.instagram2.R;
-import com.example.instagram2.Activities.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView bottomNavigationView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +52,18 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ProfileFragment();
                         break;
                 }
+
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
                 return true;
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
 
+
+
     }
+
+
     // Function to go to a chosen activity
     private void goToActivity(Class targetClass) {
 
