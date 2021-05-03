@@ -11,13 +11,13 @@
     tools:layout_editor_absoluteX="3dp"
     tools:layout_editor_absoluteY="81dp">
 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/PostContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/PostContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints">
 
     <TextView
         android:id="@+id/tvUsername"
@@ -70,8 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="50dp"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="red heart">
+        tools:ignore="MissingConstraints">
 
     </ImageView>
 
@@ -82,19 +81,15 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/image_heart_post"
         android:src="@drawable/ic_speech_bubble"
+        android:visibility="visible"
         tools:layout_editor_absoluteX="105dp"
         tools:layout_editor_absoluteY="401dp"
-        android:contentDescription="reply"
-        app:layout_constraintTop_toTopOf="@+id/tvPostTitle"
-        app:layout_constraintBottom_toTopOf="@+id/image_likes"
-        app:layout_constraintStart_toEndOf="@+id/image_heart_post"
-        app:layout_constraintVertical_bias="5.0"
-        />
+        tools:ignore="MissingConstraints"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Liked by 30 "
+        android:text="Liked by Mitch, Tom, Mohammed and 30 others"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:id="@+id/image_likes"
@@ -142,7 +137,6 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintTop_toTopOf="@+id/btnDelete" />
-
 
     <TextView
         android:id="@+id/tvReply"
