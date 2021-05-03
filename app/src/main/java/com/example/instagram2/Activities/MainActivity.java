@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.instagram2.Fragments.ComposeFragment;
+import com.example.instagram2.Fragments.MapsFragment;
 import com.example.instagram2.Fragments.PostFragment;
 import com.example.instagram2.Fragments.ProfileFragment;
 import com.example.instagram2.R;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
 
-                Fragment fragment;
+                Fragment fragment = fragmentManager.findFragmentById(R.id.flContainer);
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
                         fragment = new PostFragment();
@@ -48,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ComposeFragment();
                         break;
                     case R.id.action_profile:
-                    default:
                         fragment = new ProfileFragment();
+                        break;
+                    case R.id.action_map:
+                        fragment = new MapsFragment();
                         break;
                 }
 

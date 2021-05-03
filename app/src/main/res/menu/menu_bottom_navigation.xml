@@ -14,11 +14,6 @@
         android:title="Search"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/action_notif"
-        android:icon="@drawable/ic_alert"
-        android:title="Notif"
-        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_compose"
@@ -30,6 +25,18 @@
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Profile"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_map"
+        android:icon="@drawable/ic_map"
+        android:title="Map"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_notif"
+        android:icon="@drawable/ic_alert"
+        android:title="Notif"
         app:showAsAction="always" />
 
 
