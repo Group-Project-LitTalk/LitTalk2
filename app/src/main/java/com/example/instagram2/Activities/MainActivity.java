@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_profile:
                         fragment = new ProfileFragment();
                         break;
-                    case R.id.action_map:
+                  /*  case R.id.action_map:
                         fragment = new MapsFragment();
-                        break;
+                        break;*/
                 }
 
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();

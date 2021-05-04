@@ -51,6 +51,7 @@ public class ComposeFragment extends Fragment {
     private ImageButton ibtnCapture;
     private ImageView ivPostImage;
     private Button btnSubmit;
+    private Button btnLocation;
 
     private File photoFile;
     public String photoFileName = "photo.jpg";
@@ -77,6 +78,7 @@ public class ComposeFragment extends Fragment {
         ibtnCapture = view.findViewById(R.id.ibtnCapture);
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
+        btnLocation = view.findViewById(R.id.btnLocation);
 
         bookID = getActivity().getIntent().getStringExtra("ID");
         bookTitle = getActivity().getIntent().getStringExtra("Title");
