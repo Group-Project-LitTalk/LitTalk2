@@ -46,6 +46,7 @@
         <activity android:name=".Activities.ChatActivity" />
         <activity android:name=".Activities.CommentActivity" />
         <activity android:name=".Activities.BookActivity" />
+        <activity android:name=".Activities.AccountSettingsActivity"/>
         <activity android:name=".Activities.ProfileActivity" />
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.LoginActivity">

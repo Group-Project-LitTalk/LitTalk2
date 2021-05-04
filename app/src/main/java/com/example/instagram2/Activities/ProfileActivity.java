@@ -1,10 +1,14 @@
 package com.example.instagram2.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +22,16 @@ public class ProfileActivity extends AppCompatActivity {
 
     private Context context;
 
+    private ProgressBar mProgressBar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.profileProgressBar);
+        mProgressBar.setVisibility(View.GONE);
+
         setupToolbar();
     }
 
@@ -30,25 +40,22 @@ public class ProfileActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.profileToolBar);
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Log.d(TAG, "onMenuItemClick: clicked menu item: " + item);
+        ImageView profileMenu = (ImageView) findViewById(R.id.profileMenu);
 
-                switch (item.getItemId()){
-                    case R.id.profileMenu:
-                        Log.d(TAG, "onMenuItemClick: Navigating to Profile Preferences.");
-                }
-                return false;
+        profileMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToActivity(AccountSettingsActivity.class);
             }
         });
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.profile_menu, menu);
-        return true;
+    private void goToActivity(Class targetClass) {
+
+        Intent i = new Intent(this, targetClass);
+        startActivity(i);
+        finish();
     }
 
 }
