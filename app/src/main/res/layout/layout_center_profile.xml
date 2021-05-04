@@ -28,43 +28,25 @@
             android:layout_below="@+id/relLayout1"
             android:background="@drawable/white_grey_border_bottom">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:weightSum="100">
 
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="25dp"
-                    android:layout_weight="25">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/profile_image"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_centerVertical="true"
-                        app:civ_border_color="@color/black"
-                        app:civ_border_width="2dp"/>
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
+                <include
+                    android:id="@+id/include"
+                    layout="@layout/snippet_top_profile"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_weight="75">
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <include layout="@layout/snippet_top_profile"/>
 
-                </RelativeLayout>
-
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <LinearLayout

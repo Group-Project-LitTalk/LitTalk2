@@ -61,8 +61,8 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:contentDescription="red heart"
-        android:src="@drawable/ic_heart_red"
 
+        android:src="@drawable/ic_heart_red"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
@@ -75,12 +75,11 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="50dp"
         android:layout_toRightOf="@id/image_heart_post"
         android:contentDescription="reply"
         android:src="@drawable/ic_speech_bubble"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/image_likes"
@@ -90,7 +89,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/speech_bubble" />
+        app:layout_constraintTop_toBottomOf="@+id/image_heart_post" />
 
     <TextView
         android:id="@+id/tvDescription"
@@ -103,7 +102,7 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture"
         tools:text="trying to look cool" />
 
     <TextView
@@ -130,19 +129,6 @@
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintTop_toTopOf="@+id/btnDelete" />
 
-
-    <TextView
-        android:id="@+id/tvReply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:paddingRight="5dp"
-        android:text="Reply Post"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#9E9C9C"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"

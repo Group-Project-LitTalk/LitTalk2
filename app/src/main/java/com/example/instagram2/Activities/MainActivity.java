@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                if(menuItem.getItemId() == R.id.action_search)
-                {
+                if (menuItem.getItemId() == R.id.action_search) {
                     goToActivity(SearchActivity.class);
                     return true;
                 }
@@ -50,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_profile:
                     default:
-                   //     fragment = new ProfileFragment();
-                        goToActivity(ProfileActivity.class);
+                        fragment = new ProfileFragment();
+                        //     goToActivity(ProfileActivity.class);
                         break;
                 }
 
@@ -60,11 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
-
-
-
     }
-
 
     // Function to go to a chosen activity
     private void goToActivity(Class targetClass) {
