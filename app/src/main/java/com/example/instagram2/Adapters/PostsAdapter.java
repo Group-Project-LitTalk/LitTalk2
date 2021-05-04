@@ -22,6 +22,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.instagram2.Activities.BookActivity;
 import com.example.instagram2.Activities.ChatActivity;
 import com.example.instagram2.Activities.Heart;
+import com.example.instagram2.Activities.ViewProfileActivity;
 import com.example.instagram2.Fragments.PostFragment;
 import com.example.instagram2.Models.Post;
 import com.example.instagram2.R;
@@ -193,6 +194,22 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
             testToggle();
 
+            tvDescription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setIntent(post);
+                }
+            });
+
+            tvUsername.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setIntent(post);
+                }
+            });
+
+
+
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -238,6 +255,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             }
         }
 
+        private void setIntent(Post post)
+        {
+            Intent i = new Intent(context, ViewProfileActivity.class);
+            i.putExtra("username", post.getUsername());
+            i.putExtra("description", post.getDescription());
+            i.putExtra("image", post.getImage().getUrl());
+        }
 
         private String getDate(Post post) {
             Date date = post.getCreatedAt();
