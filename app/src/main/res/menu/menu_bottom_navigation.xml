@@ -27,17 +27,4 @@
         android:title="Profile"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/action_map"
-        android:icon="@drawable/ic_map"
-        android:title="Map"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_notif"
-        android:icon="@drawable/ic_alert"
-        android:title="Notif"
-        app:showAsAction="always" />
-
-
 </menu>
