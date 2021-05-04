@@ -50,7 +50,7 @@ Google Books api endpoint - https://www.googleapis.com/books/v1
 
 
 ### App Walkthough GIF
-<img src='LitTalk Sprint 3 vid.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='finalsprint1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### 2. Screen Archetypes
 
