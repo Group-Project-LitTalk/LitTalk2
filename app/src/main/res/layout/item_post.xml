@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ConstraintLayout"
@@ -9,7 +8,7 @@
     android:background="@color/white"
     android:padding="5dp"
     tools:layout_editor_absoluteX="3dp"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="25dp">
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -51,10 +50,8 @@
         android:src="@drawable/ic_heart_white"
         android:visibility="visible"
 
-        app:layout_constraintBottom_toTopOf="@+id/image_likes"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         tools:ignore="MissingConstraints">
 
     </ImageView>
@@ -63,13 +60,12 @@
         android:id="@+id/image_heart_red_post_invi"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:contentDescription="red heart"
         android:src="@drawable/ic_heart_red"
-        android:visibility="invisible"
 
-        app:layout_constraintBottom_toTopOf="@+id/image_likes"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="50dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         tools:ignore="MissingConstraints">
 
     </ImageView>
@@ -79,51 +75,47 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_centerVertical="true"
+        android:layout_marginStart="50dp"
         android:layout_toRightOf="@id/image_heart_post"
+        android:contentDescription="reply"
         android:src="@drawable/ic_speech_bubble"
-        android:visibility="visible"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="401dp"
-        tools:ignore="MissingConstraints"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
     <TextView
+        android:id="@+id/image_likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Liked by Mitch, Tom, Mohammed and 30 others"
+        android:text="Liked by 30 "
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:id="@+id/image_likes"
-        app:layout_constraintBottom_toTopOf="@+id/tvDescription"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/speech_bubble" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_margin="3dp"
         android:fontFamily="sans-serif"
         android:maxLength="200"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/tvReply"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_likes"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
         tools:text="trying to look cool" />
 
     <TextView
         android:id="@+id/tvPostTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
+        android:layout_margin="3dp"
         android:clickable="true"
         android:text="BookTitle"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#2B2B2B"
         android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/image_likes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
@@ -137,6 +129,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintTop_toTopOf="@+id/btnDelete" />
+
 
     <TextView
         android:id="@+id/tvReply"
