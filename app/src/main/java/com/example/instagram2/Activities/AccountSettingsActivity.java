@@ -51,8 +51,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(mContext, android.R.layout.simple_list_item_1, options);
         listView.setAdapter(adapter);
 
-
-
     }
 
     private void goToActivity(Class targetClass) {

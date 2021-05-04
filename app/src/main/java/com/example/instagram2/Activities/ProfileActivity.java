@@ -13,8 +13,18 @@ import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.instagram2.Adapters.PostsAdapter;
+import com.example.instagram2.Models.Post;
 import com.example.instagram2.R;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -23,6 +33,11 @@ public class ProfileActivity extends AppCompatActivity {
     private Context context;
 
     private ProgressBar mProgressBar;
+
+
+    private RecyclerView rvProfilePosts;
+    protected PostsAdapter adapter;
+    protected List<Post> allPosts;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +64,46 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        rvProfilePosts = (RecyclerView) findViewById(R.id.rvProfilePosts);
+
+
+        allPosts = new ArrayList<>();
+        adapter = new PostsAdapter(ProfileActivity.this, allPosts);
+
+        rvProfilePosts.setAdapter(adapter);
+
+        rvProfilePosts.setLayoutManager(new LinearLayoutManager(ProfileActivity.this));
+
+        queryPosts();
+
+    }
+
+    protected void queryPosts() {
+
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+
+        query.include(Post.KEY_USER);
+        query.setLimit(20);
+        query.addDescendingOrder(Post.KEY_CREATED_KEY);
+
+
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+
+                for (Post post : posts) {
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername() + " ,Time: " + post.getCreatedAt());
+                }
+
+                allPosts.addAll(posts);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void goToActivity(Class targetClass) {
